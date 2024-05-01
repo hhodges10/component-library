@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import './../../vars.css';
 
 type ButtonProps = {
@@ -9,11 +9,18 @@ type ButtonProps = {
   handler: MouseEventHandler;
 };
 
+type ButtonTheme = {
+  mainColor: string;
+  accentColor: string;
+  darkAccentColor: string;
+  focusColor: string;
+};
+
 const StyledButton = styled.button<{ $primary?: boolean }>`
   background-color: ${(props) =>
-    props.$primary ? 'var(--color-primary)' : 'white'};
-  color: ${(props) => (props.$primary ? 'white' : 'var(--color-primary)')};
-  border: 2px solid var(--color-primary);
+    props.$primary ? props.theme.mainColor : 'white'};
+  color: ${(props) => (props.$primary ? 'white' : props.theme.mainColor)};
+  border: 2px solid ${(props) => props.theme.mainColor};
   font-family: 'Rubik', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -27,67 +34,50 @@ const StyledButton = styled.button<{ $primary?: boolean }>`
 
   &:hover {
     background-color: ${(props) =>
-      props.$primary ? 'var(--color-accent)' : 'var(--color-primary)'};
+      props.$primary ? props.theme.accentColor : props.theme.mainColor};
     border: ${(props) =>
       props.$primary
-        ? '2px solid var(--color-accent)'
-        : '2px solid var(--color-primary)'};
+        ? `2px solid ${props.theme.accentColor}`
+        : `2px solid ${props.theme.mainColor}`};
     color: white;
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(53, 124, 121, 0.4);
+    box-shadow: 0 0 0 3px ${(props) => props.theme.focusColor};
   }
 
   &:active {
     background-color: ${(props) =>
-      props.$primary ? '#173533' : 'var(--color-accent)'};
+      props.$primary ? props.theme.darkAccentColor : props.theme.accentColor};
     border: ${(props) =>
-      props.$primary ? '2px solid #173533' : '2px solid var(--color-accent)'};
+      props.$primary
+        ? `2px solid ${props.theme.darkAccentColor}`
+        : `2px solid ${props.theme.accentColor}`};
   }
 `;
 
-const DestructiveButton = styled(StyledButton)<{ $primary?: boolean }>`
-  background-color: ${(props) =>
-    props.$primary ? 'var(--color-danger)' : 'white'};
-  color: ${(props) => (props.$primary ? 'white' : 'var(--color-danger)')};
-  border: 2px solid var(--color-danger);
+const destructiveTheme: ButtonTheme = {
+  mainColor: 'var(--color-danger)',
+  accentColor: 'var(--color-danger_dark)',
+  darkAccentColor: '#580c0c',
+  focusColor: 'rgba(193, 30, 30, 0.4)',
+};
 
-  &:hover {
-    background-color: ${(props) =>
-      props.$primary ? 'var(--color-danger_dark)' : 'var(--color-danger)'};
-    border: ${(props) =>
-      props.$primary
-        ? '2px solid var(--color-danger_dark)'
-        : '2px solid var(--color-danger)'};
-    color: white;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(193, 30, 30, 0.4);
-  }
-
-  &:active {
-    background-color: ${(props) =>
-      props.$primary ? '#580c0c' : 'var(--color-danger_dark)'};
-    border: ${(props) =>
-      props.$primary
-        ? '2px solid #580c0c'
-        : '2px solid var(--color-danger_dark)'};
-  }
-`;
+const primaryTheme: ButtonTheme = {
+  mainColor: 'var(--color-primary)',
+  accentColor: 'var(--color-primary_dark)',
+  darkAccentColor: '#173533',
+  focusColor: 'rgba(53, 124, 121, 0.4)',
+};
 
 function Button({ label, primary, destructive, handler }: ButtonProps) {
-  return destructive ? (
-    <DestructiveButton onClick={handler} $primary={primary}>
-      {label}
-    </DestructiveButton>
-  ) : (
-    <StyledButton onClick={handler} $primary={primary}>
-      {label}
-    </StyledButton>
+  return (
+    <ThemeProvider theme={destructive ? destructiveTheme : primaryTheme}>
+      <StyledButton onClick={handler} $primary={primary}>
+        {label}
+      </StyledButton>
+    </ThemeProvider>
   );
 }
 
