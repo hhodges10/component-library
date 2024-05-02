@@ -2,14 +2,14 @@ import { MouseEventHandler } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import './../../vars.css';
 
-type ButtonProps = {
+export type ButtonProps = {
   label: string;
   primary: boolean;
-  destructive?: boolean;
-  handler: MouseEventHandler;
+  theme?: ButtonTheme;
+  onClick: MouseEventHandler;
 };
 
-type ButtonTheme = {
+export type ButtonTheme = {
   mainColor: string;
   accentColor: string;
   darkAccentColor: string;
@@ -17,19 +17,21 @@ type ButtonTheme = {
 };
 
 const StyledButton = styled.button<{ $primary?: boolean }>`
+  background-position: center;
+  transition: background 0.8s;
   background-color: ${(props) =>
-    props.$primary ? props.theme.mainColor : 'white'};
-  color: ${(props) => (props.$primary ? 'white' : props.theme.mainColor)};
+    props.$primary ? props.theme.mainColor : 'transparent'};
+  color: ${(props) =>
+    props.$primary ? 'var(--color-light)' : props.theme.mainColor};
   border: 2px solid ${(props) => props.theme.mainColor};
   font-family: 'Rubik', sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-size: 20px;
   outline: none;
   border-radius: 5px;
-  padding: 10px 20px;
-  transition: 0.4s;
+  padding: 16px 24px;
   cursor: pointer;
 
   &:hover {
@@ -39,7 +41,13 @@ const StyledButton = styled.button<{ $primary?: boolean }>`
       props.$primary
         ? `2px solid ${props.theme.accentColor}`
         : `2px solid ${props.theme.mainColor}`};
-    color: white;
+    color: var(--color-light);
+    background: ${(props) =>
+      props.$primary
+        ? `${props.theme.accentColor} radial-gradient(circle, transparent 1%, ${props.theme.accentColor} 1%)
+      center/15000%`
+        : `${props.theme.mainColor} radial-gradient(circle, transparent 1%, ${props.theme.mainColor} 1%)
+      center/15000%`};
   }
 
   &:focus {
@@ -50,31 +58,34 @@ const StyledButton = styled.button<{ $primary?: boolean }>`
   &:active {
     background-color: ${(props) =>
       props.$primary ? props.theme.darkAccentColor : props.theme.accentColor};
+    background-size: 100%;
+    transition: background 0s;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-light);
     border: ${(props) =>
       props.$primary
-        ? `2px solid ${props.theme.darkAccentColor}`
-        : `2px solid ${props.theme.accentColor}`};
+        ? `2px solid ${props.theme.mainColor}`
+        : '2px solid var(--color-light)'};
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(97, 229, 255, 0.835);
+    }
   }
 `;
-
-const destructiveTheme: ButtonTheme = {
-  mainColor: 'var(--color-danger)',
-  accentColor: 'var(--color-danger_dark)',
-  darkAccentColor: '#580c0c',
-  focusColor: 'rgba(193, 30, 30, 0.4)',
-};
 
 const primaryTheme: ButtonTheme = {
   mainColor: 'var(--color-primary)',
   accentColor: 'var(--color-primary_dark)',
-  darkAccentColor: '#173533',
-  focusColor: 'rgba(53, 124, 121, 0.4)',
+  darkAccentColor: 'var(--color-primary_xtra_dark)',
+  focusColor: 'rgba(34, 150, 150, 0.4)',
 };
 
-function Button({ label, primary, destructive, handler }: ButtonProps) {
+function Button({ primary, label, onClick, theme }: ButtonProps) {
   return (
-    <ThemeProvider theme={destructive ? destructiveTheme : primaryTheme}>
-      <StyledButton onClick={handler} $primary={primary}>
+    <ThemeProvider theme={theme || primaryTheme}>
+      <StyledButton $primary={primary} onClick={onClick}>
         {label}
       </StyledButton>
     </ThemeProvider>
