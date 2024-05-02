@@ -5,6 +5,7 @@ import './../../vars.css';
 export type ButtonProps = {
   label: string;
   primary: boolean;
+  colorTheme?: string;
   theme?: ButtonTheme;
   onClick: MouseEventHandler;
 };
@@ -16,14 +17,23 @@ export type ButtonTheme = {
   focusColor: string;
 };
 
-const StyledButton = styled.button<{ $primary?: boolean }>`
+const StyledButton = styled.button<{ $primary?: boolean; $colorTheme: string }>`
   background-position: center;
   transition: background 0.8s;
   background-color: ${(props) =>
     props.$primary ? props.theme.mainColor : 'transparent'};
   color: ${(props) =>
-    props.$primary ? 'var(--color-light)' : props.theme.mainColor};
-  border: 2px solid ${(props) => props.theme.mainColor};
+    props.$primary
+      ? 'var(--color-light)'
+      : props.$colorTheme === 'light'
+        ? props.theme.mainColor
+        : 'var(--color-light)'};
+  border: ${(props) =>
+    props.$primary
+      ? `2px solid ${props.theme.mainColor}`
+      : props.$colorTheme === 'light'
+        ? `2px solid ${props.theme.mainColor}`
+        : '2px solid var(--color-light)'};
   font-family: 'Rubik', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -62,17 +72,18 @@ const StyledButton = styled.button<{ $primary?: boolean }>`
     transition: background 0s;
   }
 
-  @media (prefers-color-scheme: dark) {
+  /* Can use media query when utilizing this component outside of storybook */
+  /* @media (prefers-color-scheme: dark) {
     color: var(--color-light);
     border: ${(props) =>
-      props.$primary
-        ? `2px solid ${props.theme.mainColor}`
-        : '2px solid var(--color-light)'};
+    props.$primary
+      ? `2px solid ${props.theme.mainColor}`
+      : '2px solid var(--color-light)'};
 
     &:focus {
       box-shadow: 0 0 0 3px rgba(97, 229, 255, 0.835);
     }
-  }
+  } */
 `;
 
 const primaryTheme: ButtonTheme = {
@@ -82,10 +93,20 @@ const primaryTheme: ButtonTheme = {
   focusColor: 'rgba(34, 150, 150, 0.4)',
 };
 
-function Button({ primary, label, onClick, theme }: ButtonProps) {
+function Button({
+  primary,
+  label,
+  onClick,
+  theme,
+  colorTheme = 'light',
+}: ButtonProps) {
   return (
     <ThemeProvider theme={theme || primaryTheme}>
-      <StyledButton $primary={primary} onClick={onClick}>
+      <StyledButton
+        $primary={primary}
+        $colorTheme={colorTheme}
+        onClick={onClick}
+      >
         {label}
       </StyledButton>
     </ThemeProvider>
