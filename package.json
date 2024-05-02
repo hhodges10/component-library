@@ -13,6 +13,8 @@
     "chromatic": "npx chromatic --project-token=chpt_df8001d652e00c8"
   },
   "dependencies": {
+    "@storybook/manager-api": "^8.0.9",
+    "@storybook/preview-api": "^8.0.9",
     "new-component": "^5.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +27,7 @@
     "@storybook/addon-interactions": "^8.0.9",
     "@storybook/addon-links": "^8.0.9",
     "@storybook/addon-onboarding": "^8.0.9",
+    "@storybook/addon-themes": "^8.0.9",
     "@storybook/blocks": "^8.0.9",
     "@storybook/react": "^8.0.9",
     "@storybook/react-vite": "^8.0.9",
