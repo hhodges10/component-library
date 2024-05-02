@@ -1,107 +1,74 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Button, { ButtonTheme } from './Button';
+import Button, { ButtonProps } from './Button';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  argTypes: {
+    label: {
+      control: { type: 'text' },
+    },
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-const primaryButton = {
-  label: 'click me',
-  primary: true,
+const primaryButton: ButtonProps = {
+  label: 'primary',
+  type: 'solid',
+  subtype: 'primary',
   onClick: (event: any) => {
     console.log('Button clicked: ', event);
   },
 };
 
-const accentTheme: ButtonTheme = {
-  mainColor: 'var(--color-accent)',
-  accentColor: 'var(--color-accent_dark)',
-  darkAccentColor: 'var(--color-accent_xtra_dark)',
-  focusColor: 'rgba(79, 31, 255, 0.4)',
+const accentButton: ButtonProps = {
+  ...primaryButton,
+  label: 'accent',
+  subtype: 'accent',
 };
 
-const accentButton = {
-  label: 'click me',
-  primary: true,
-  theme: accentTheme,
-  onClick: (event: any) => {
-    console.log('Button clicked: ', event);
-  },
+const destructiveButton: ButtonProps = {
+  ...primaryButton,
+  label: 'destructive',
+  subtype: 'destructive',
 };
 
-const destructiveTheme: ButtonTheme = {
-  mainColor: 'var(--color-danger)',
-  accentColor: 'var(--color-danger_dark)',
-  darkAccentColor: '#580c0c',
-  focusColor: 'rgba(193, 30, 30, 0.4)',
-};
-
-export const Primary: Story = {
-  render: (_args, { globals: { theme } }) => {
-    const buttonArgs = { ...primaryButton, colorTheme: theme };
-    const accentButtonArgs = {
-      ...accentButton,
-      colorTheme: theme,
-    };
+export const Solid: Story = {
+  render: (args) => {
+    const buttonArgs = { ...primaryButton, ...args };
     return (
       <>
         <Button {...buttonArgs} />
         <div style={{ margin: '10px' }}></div>
-        <Button {...accentButtonArgs}></Button>
+        <Button {...accentButton} />
+        <div style={{ margin: '10px' }}></div>
+        <Button {...destructiveButton} />
       </>
     );
   },
+};
+
+const primaryOutline: ButtonProps = { ...primaryButton, type: 'outline' };
+const accentOutline: ButtonProps = { ...accentButton, type: 'outline' };
+const destructiveOutline: ButtonProps = {
+  ...destructiveButton,
+  type: 'outline',
 };
 
 export const Outline: Story = {
-  render: (_args, { globals: { theme } }) => {
-    const outlineArgs = { ...primaryButton, primary: false, colorTheme: theme };
-    const accentOutlineArgs = {
-      ...accentButton,
-      primary: false,
-      colorTheme: theme,
-    };
+  render: (args) => {
+    const buttonArgs = { ...primaryOutline, ...args };
     return (
       <>
-        <Button {...outlineArgs} />
+        <Button {...buttonArgs} />
         <div style={{ margin: '10px' }}></div>
-        <Button {...accentOutlineArgs}></Button>
+        <Button {...accentOutline} />
+        <div style={{ margin: '10px' }}></div>
+        <Button {...destructiveOutline} />
       </>
     );
-  },
-};
-
-export const DestructivePrimary: Story = {
-  render: (_args, { globals: { theme } }) => {
-    const destructiveArgs = {
-      label: 'click me',
-      primary: true,
-      theme: destructiveTheme,
-      colorTheme: theme,
-      onClick: (event: any) => {
-        console.log('Button clicked: ', event);
-      },
-    };
-    return <Button {...destructiveArgs} />;
-  },
-};
-
-export const DestructiveOutline: Story = {
-  render: (_args, { globals: { theme } }) => {
-    const destructiveOutlineArgs = {
-      label: 'click me',
-      primary: false,
-      theme: destructiveTheme,
-      colorTheme: theme,
-      onClick: (event: any) => {
-        console.log('Button clicked: ', event);
-      },
-    };
-    return <Button {...destructiveOutlineArgs} />;
   },
 };
