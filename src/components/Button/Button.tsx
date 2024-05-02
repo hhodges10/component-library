@@ -1,39 +1,30 @@
 import { MouseEventHandler } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import './../../vars.css';
 
 export type ButtonProps = {
   label: string;
-  primary: boolean;
-  colorTheme?: string;
-  theme?: ButtonTheme;
-  onClick: MouseEventHandler;
+  type: 'solid' | 'outline';
+  subtype: 'primary' | 'accent' | 'destructive';
+  onClick?: MouseEventHandler;
 };
 
-export type ButtonTheme = {
-  mainColor: string;
-  accentColor: string;
-  darkAccentColor: string;
-  focusColor: string;
-};
-
-const StyledButton = styled.button<{ $primary?: boolean; $colorTheme: string }>`
+const SolidButton = styled.button<{ $subtype?: string }>`
   background-position: center;
   transition: background 0.8s;
-  background-color: ${(props) =>
-    props.$primary ? props.theme.mainColor : 'transparent'};
-  color: ${(props) =>
-    props.$primary
-      ? 'var(--color-light)'
-      : props.$colorTheme === 'light'
-        ? props.theme.mainColor
-        : 'var(--color-light)'};
-  border: ${(props) =>
-    props.$primary
-      ? `2px solid ${props.theme.mainColor}`
-      : props.$colorTheme === 'light'
-        ? `2px solid ${props.theme.mainColor}`
-        : '2px solid var(--color-light)'};
+  background-color: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
+      ? theme.color.primary
+      : $subtype === 'accent'
+        ? theme.color.accent
+        : theme.color.danger};
+  color: ${({ theme }) => theme.color.text};
+  border: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
+      ? `2px solid ${theme.color.primary}`
+      : $subtype === 'accent'
+        ? `2px solid ${theme.color.accent}`
+        : `2px solid ${theme.color.danger}`};
   font-family: 'Rubik', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -45,72 +36,127 @@ const StyledButton = styled.button<{ $primary?: boolean; $colorTheme: string }>`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) =>
-      props.$primary ? props.theme.accentColor : props.theme.mainColor};
-    border: ${(props) =>
-      props.$primary
-        ? `2px solid ${props.theme.accentColor}`
-        : `2px solid ${props.theme.mainColor}`};
-    color: var(--color-light);
-    background: ${(props) =>
-      props.$primary
-        ? `${props.theme.accentColor} radial-gradient(circle, transparent 1%, ${props.theme.accentColor} 1%)
+    background-color: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? theme.color.primaryDark
+        : $subtype === 'accent'
+          ? theme.color.accentDark
+          : theme.color.dangerDark};
+    border: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? `2px solid ${theme.color.primaryDark}`
+        : $subtype === 'accent'
+          ? `2px solid ${theme.color.accentDark}`
+          : `2px solid ${theme.color.dangerDark}`};
+    color: ${({ theme }) => theme.color.text};
+    background: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? `${theme.color.primaryDark} radial-gradient(circle, transparent 1%, ${theme.color.primaryDark} 1%)
       center/15000%`
-        : `${props.theme.mainColor} radial-gradient(circle, transparent 1%, ${props.theme.mainColor} 1%)
+        : $subtype === 'accent'
+          ? `${theme.color.accentDark} radial-gradient(circle, transparent 1%, ${theme.color.accentDark} 1%)
+      center/15000%`
+          : `${theme.color.dangerDark} radial-gradient(circle, transparent 1%, ${theme.color.dangerDark} 1%)
       center/15000%`};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px ${(props) => props.theme.focusColor};
+    box-shadow: 0 0 0 3px
+      ${({ $subtype, theme }) =>
+        $subtype === 'accent'
+          ? theme.color.accentFocusColor
+          : theme.color.focusColor};
   }
 
   &:active {
-    background-color: ${(props) =>
-      props.$primary ? props.theme.darkAccentColor : props.theme.accentColor};
+    background-color: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? theme.color.primaryXDark
+        : $subtype === 'accent'
+          ? theme.color.accentXDark
+          : theme.color.dangerXDark};
     background-size: 100%;
     transition: background 0s;
   }
-
-  /* Can use media query when utilizing this component outside of storybook */
-  /* @media (prefers-color-scheme: dark) {
-    color: var(--color-light);
-    border: ${(props) =>
-    props.$primary
-      ? `2px solid ${props.theme.mainColor}`
-      : '2px solid var(--color-light)'};
-
-    &:focus {
-      box-shadow: 0 0 0 3px rgba(97, 229, 255, 0.835);
-    }
-  } */
 `;
 
-const primaryTheme: ButtonTheme = {
-  mainColor: 'var(--color-primary)',
-  accentColor: 'var(--color-primary_dark)',
-  darkAccentColor: 'var(--color-primary_xtra_dark)',
-  focusColor: 'rgba(34, 150, 150, 0.4)',
-};
+const OutlineButton = styled(SolidButton)<{ $subtype?: string }>`
+  background-color: transparent;
+  color: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
+      ? theme.color.primary
+      : $subtype === 'accent'
+        ? theme.color.accent
+        : theme.color.danger};
+  border: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
+      ? `2px solid ${theme.color.primary}`
+      : $subtype === 'accent'
+        ? `2px solid ${theme.color.accent}`
+        : `2px solid ${theme.color.danger}`};
 
-function Button({
-  primary,
-  label,
-  onClick,
-  theme,
-  colorTheme = 'light',
-}: ButtonProps) {
-  return (
-    <ThemeProvider theme={theme || primaryTheme}>
-      <StyledButton
-        $primary={primary}
-        $colorTheme={colorTheme}
-        onClick={onClick}
-      >
-        {label}
-      </StyledButton>
-    </ThemeProvider>
-  );
+  &:hover {
+    color: ${({ theme }) => theme.color.text};
+    background-color: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? theme.color.primary
+        : $subtype === 'accent'
+          ? theme.color.accent
+          : theme.color.danger};
+    border: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? `2px solid ${theme.color.primary}`
+        : $subtype === 'accent'
+          ? `2px solid ${theme.color.accent}`
+          : `2px solid ${theme.color.danger}`};
+    background: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? `${theme.color.primary} radial-gradient(circle, transparent 1%, ${theme.color.primary} 1%)
+      center/15000%`
+        : $subtype === 'accent'
+          ? `${theme.color.accent} radial-gradient(circle, transparent 1%, ${theme.color.accent} 1%)
+      center/15000%`
+          : `${theme.color.danger} radial-gradient(circle, transparent 1%, ${theme.color.danger} 1%)
+      center/15000%`};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      ${({ $subtype, theme }) =>
+        $subtype === 'accent'
+          ? theme.color.accentFocusColor
+          : theme.color.focusColor};
+  }
+
+  &:active {
+    background-color: ${({ $subtype, theme }) =>
+      $subtype === 'primary'
+        ? theme.color.primaryDark
+        : $subtype === 'accent'
+          ? theme.color.accentDark
+          : theme.color.dangerDark};
+    background-size: 100%;
+    transition: background 0s;
+  }
+`;
+
+function Button({ type, subtype, label, onClick }: ButtonProps) {
+  switch (type) {
+    case 'solid':
+      return (
+        <SolidButton onClick={onClick} $subtype={subtype}>
+          {label}
+        </SolidButton>
+      );
+    case 'outline':
+      return (
+        <OutlineButton onClick={onClick} $subtype={subtype}>
+          {label}
+        </OutlineButton>
+      );
+  }
 }
 
 export default Button;

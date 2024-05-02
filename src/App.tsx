@@ -1,13 +1,21 @@
 import React from 'react';
 import './App.css';
 import Button, { ButtonProps } from './components/Button';
+import { ThemeProvider } from 'styled-components';
+import theme from './themes/themes';
 
 function App() {
-  const [isDarkScheme, setIsDarkScheme] = React.useState(false);
+  const [systemColorScheme, setSystemColorScheme] = React.useState(
+    window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+      ? 'dark'
+      : 'light'
+  );
 
   const updateColorScheme = () => {
-    setIsDarkScheme(
-      window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false
+    setSystemColorScheme(
+      window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+        ? 'dark'
+        : 'light'
     );
   };
 
@@ -18,14 +26,16 @@ function App() {
 
   const buttonProps: ButtonProps = {
     label: 'Button',
-    primary: true,
-    colorTheme: isDarkScheme ? 'dark' : 'light',
+    type: 'solid',
+    subtype: 'primary',
     onClick: (event) => console.log(event),
   };
-  const outlineButton: ButtonProps = { ...buttonProps, primary: false };
-  
+  const outlineButton: ButtonProps = { ...buttonProps, type: 'outline' };
+  const currentTheme =
+    systemColorScheme === 'dark' ? { ...theme.dark } : { ...theme.light };
+
   return (
-    <>
+    <ThemeProvider theme={currentTheme}>
       <h1>
         Testing out storybook for creating component library and testing github
         branch rule
@@ -33,7 +43,7 @@ function App() {
       <Button {...buttonProps}></Button>
       <div style={{ margin: '10px' }}></div>
       <Button {...outlineButton}></Button>
-    </>
+    </ThemeProvider>
   );
 }
 
