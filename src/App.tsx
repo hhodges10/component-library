@@ -50,7 +50,7 @@ function App() {
         branch rule
       </h1>
       <Wrapper>
-        <Input subtype="primary" required></Input>
+        <Input type="underline" subtype="primary" required></Input>
         <div style={{ margin: '10px' }}></div>
         <Button {...buttonProps}></Button>
         <div style={{ margin: '10px' }}></div>

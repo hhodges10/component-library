@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 type InputProps = {
-  subtype: 'primary' | 'accent';
+  type?: 'underline' | 'outline';
+  subtype?: 'primary' | 'accent';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   required?: boolean;
 };
 
-const DefaultInput = styled.input<{ $subtype: string }>`
+const UnderlineInput = styled.input<{ $subtype: string }>`
   height: 48px;
   width: 480px;
   font-size: ${({ theme }) => theme.font.md};
@@ -42,7 +43,7 @@ const Label = styled.label<{ $subtype: string }>`
     cursor: text;
   }
 
-  ${DefaultInput}:is(:focus, :not(:placeholder-shown)) ~ & {
+  ${UnderlineInput}:is(:focus, :not(:placeholder-shown)) ~ & {
     top: -20px;
     opacity: 1;
     font-size: 1.1rem;
@@ -54,15 +55,35 @@ const InputWrapper = styled.div`
   width: 480px;
 `;
 
-function Input({ subtype, required = false }: InputProps) {
+const OutlineInput = styled(UnderlineInput)`
+  border: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
+      ? `4px solid ${theme.color.primary}`
+      : `4px solid ${theme.color.accent}`};
+`;
+
+function Input({
+  type = 'underline',
+  subtype = 'primary',
+  required = false,
+}: InputProps) {
   return (
     <InputWrapper>
-      <DefaultInput
-        id="input"
-        $subtype={subtype}
-        required={required}
-        placeholder=" "
-      ></DefaultInput>
+      {type === 'underline' ? (
+        <UnderlineInput
+          id="input"
+          $subtype={subtype}
+          required={required}
+          placeholder=" "
+        ></UnderlineInput>
+      ) : (
+        <OutlineInput
+          id="input"
+          $subtype={subtype}
+          required={required}
+          placeholder=" "
+        ></OutlineInput>
+      )}
       <Label id="label" htmlFor="input" $subtype={subtype}>
         First Name
       </Label>
