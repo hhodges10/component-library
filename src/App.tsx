@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
 import Button, { ButtonProps } from './components/Button';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import theme from './themes/themes';
+import Input from './components/Input';
 
 function App() {
   const [systemColorScheme, setSystemColorScheme] = React.useState(
@@ -34,15 +35,27 @@ function App() {
   const currentTheme =
     systemColorScheme === 'dark' ? { ...theme.dark } : { ...theme.light };
 
+  const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 40%;
+  `;
+
   return (
     <ThemeProvider theme={currentTheme}>
       <h1>
         Testing out storybook for creating component library and testing github
         branch rule
       </h1>
-      <Button {...buttonProps}></Button>
-      <div style={{ margin: '10px' }}></div>
-      <Button {...outlineButton}></Button>
+      <Wrapper>
+        <Input subtype="primary" required></Input>
+        <div style={{ margin: '10px' }}></div>
+        <Button {...buttonProps}></Button>
+        <div style={{ margin: '10px' }}></div>
+        <Button {...outlineButton}></Button>
+      </Wrapper>
     </ThemeProvider>
   );
 }

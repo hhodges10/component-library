@@ -60,13 +60,9 @@ const SolidButton = styled.button<{ $subtype?: string }>`
       center/15000%`};
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px
-      ${({ $subtype, theme }) =>
-        $subtype === 'accent'
-          ? theme.color.accentFocusColor
-          : theme.color.focusColor};
+  &:focus-visible {
+    outline: ${({ theme }) => `2px solid ${theme.color.accentFocusColor}`};
+    outline-offset: 2px;
   }
 
   &:active {
@@ -121,13 +117,9 @@ const OutlineButton = styled(SolidButton)<{ $subtype?: string }>`
       center/15000%`};
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px
-      ${({ $subtype, theme }) =>
-        $subtype === 'accent'
-          ? theme.color.accentFocusColor
-          : theme.color.focusColor};
+  &:focus-visible {
+    outline: ${({ theme }) => `2px solid ${theme.color.accentFocusColor}`};
+    outline-offset: 2px;
   }
 
   &:active {

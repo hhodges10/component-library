@@ -1,7 +1,8 @@
 :root {
   --color-light: #ebebeb;
   --color-dark: #171926;
-  --color-focus: #;
+  --color-light-background_variant: #cccccc;
+  --color-dark-background_variant: #3d4366;
 
   --color-light-primary: #1a7474;
   --color-light-primary_dark: #135353;
@@ -22,4 +23,6 @@
   --color-dark-danger: #eb494b;
   --color-dark-danger_dark: #e72326;
   --color-dark-danger_xtra_dark: #ca1619;
+
+  --font-md: 1.25rem;
 }
