@@ -12,6 +12,7 @@ type Story = StoryObj<typeof Input>;
 
 export const PrimaryInput: Story = {
   args: {
+    type: 'underline',
     subtype: 'primary',
   },
 };
