@@ -6,11 +6,19 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
+const defaultTheme = {
+  font: {
+    md: 'var(--font-md)',
+  },
+};
+
 export const lightTheme = {
   dark: 'var(--color-dark)',
   light: 'var(--color-light)',
   background: 'var(--color-light)',
+  backgroundVar: 'var(--color-light-background_variant)',
   text: 'var(--color-light)',
+  opposite: 'var(--color-dark)',
   focusColor: 'rgba(79, 31, 255, 0.6)',
   accentFocusColor: 'rgba(63, 162, 162, 0.6)',
   primary: 'var(--color-light-primary)',
@@ -28,7 +36,9 @@ export const darkTheme = {
   dark: 'var(--color-dark)',
   light: 'var(--color-light)',
   background: 'var(--color-dark)',
+  backgroundVar: 'var(--color-dark-background_variant)',
   text: 'var(--color-dark)',
+  opposite: 'var(--color-light)',
   focusColor: 'rgba(159, 133, 255, 0.9)',
   accentFocusColor: 'rgba(196, 232, 232, 0.8)',
   primary: 'var(--color-dark-primary)',
@@ -45,9 +55,11 @@ export const darkTheme = {
 const theme = {
   dark: {
     color: darkTheme,
+    ...defaultTheme,
   },
   light: {
     color: lightTheme,
+    ...defaultTheme,
   },
 };
 
