@@ -16,3 +16,10 @@ export const PrimaryInput: Story = {
     subtype: 'primary',
   },
 };
+
+export const OutlineInput: Story = {
+  args: {
+    type: 'outline',
+    subtype: 'primary',
+  },
+};
