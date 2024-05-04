@@ -7,6 +7,11 @@ type InputProps = {
   required?: boolean;
 };
 
+const InputWrapper = styled.div`
+  position: relative;
+  width: 480px;
+`;
+
 const UnderlineInput = styled.input<{ $subtype: string }>`
   height: 48px;
   width: 480px;
@@ -50,16 +55,14 @@ const Label = styled.label<{ $subtype: string }>`
   }
 `;
 
-const InputWrapper = styled.div`
-  position: relative;
-  width: 480px;
-`;
-
 const OutlineInput = styled(UnderlineInput)`
   border: ${({ $subtype, theme }) =>
     $subtype === 'primary'
       ? `4px solid ${theme.color.primary}`
       : `4px solid ${theme.color.accent}`};
+  + ${Label} {
+    top: 32px;
+  }
 `;
 
 function Input({
