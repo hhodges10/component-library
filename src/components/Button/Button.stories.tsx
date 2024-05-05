@@ -36,7 +36,7 @@ const destructiveButton: ButtonProps = {
   subtype: 'destructive',
 };
 
-export const Solid: Story = {
+export const Default: Story = {
   render: (args) => {
     const buttonArgs = { ...primaryButton, ...args };
     return (
