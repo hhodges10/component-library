@@ -44,7 +44,7 @@ const StyledCheckbox = styled.div<{ $checked: boolean; $disabled: boolean }>`
       ? color.focusColor
       : $checked
         ? color.accentXDark
-        : color.accent};
+        : color.accentLight};
     transition: all 150ms;
 
     ${HiddenCheckbox}:focus + & {
@@ -73,6 +73,7 @@ const LabelSpan = styled.span<{ $disabled: boolean }>`
     font-size: ${font.md};
     margin-left: 8px;
     opacity: ${$disabled ? 0.6 : 1};
+    user-select: none;
 
     &:hover {
       cursor: ${$disabled ? 'not-allowed' : 'pointer'};
