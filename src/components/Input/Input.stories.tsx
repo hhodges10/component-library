@@ -10,14 +10,14 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
-export const PrimaryInput: Story = {
+export const Default: Story = {
   args: {
     type: 'underline',
     subtype: 'primary',
   },
 };
 
-export const OutlineInput: Story = {
+export const Outline: Story = {
   args: {
     type: 'outline',
     subtype: 'primary',

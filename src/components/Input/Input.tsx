@@ -25,7 +25,7 @@ const UnderlineInput = styled.input<{ $subtype: string }>`
     padding: 6px 12px 0;
     margin-top: 12px;
     outline: none;
-    color: ${color.opposite};
+    color: ${color.text};
     background-color: ${color.backgroundVar};
 
     &:focus {
@@ -40,7 +40,7 @@ const Label = styled.label<{ $subtype: string }>`
     position: absolute;
     top: 30px;
     left: 10px;
-    color: ${color.opposite};
+    color: ${color.text};
     font-family: 'Rubik', sans-serif;
     font-size: 1.25rem;
     opacity: 0.85;
