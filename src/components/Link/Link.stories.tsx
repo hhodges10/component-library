@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Link>;
 
 const Paragraph = styled.p`
   ${({ theme: { font, color } }) => css`
-    color: ${color.opposite};
+    color: ${color.text};
     font-size: ${font.md};
   `}
 `;
@@ -44,7 +44,7 @@ const LinkTemplate = (args: LinkProps) => {
   );
 };
 
-export const PrimaryLink: Story = {
+export const Default: Story = {
   render: (args) => (
     <LinkTemplate {...args} href={args.href || '/'}>
       {args.children || 'this is a link'}

@@ -17,7 +17,7 @@ const SolidButton = styled.button<{ $subtype?: string }>`
       : $subtype === 'accent'
         ? color.accent
         : color.danger};
-    color: ${color.text};
+    color: ${color.background};
     border: ${$subtype === 'primary'
       ? `2px solid ${color.primary}`
       : $subtype === 'accent'
@@ -44,7 +44,7 @@ const SolidButton = styled.button<{ $subtype?: string }>`
         : $subtype === 'accent'
           ? `2px solid ${color.accentDark}`
           : `2px solid ${color.dangerDark}`};
-      color: ${color.text};
+      color: ${color.background};
       background: ${$subtype === 'primary'
         ? `${color.primaryDark} radial-gradient(circle, transparent 1%, ${color.primaryDark} 1%)
       center/15000%`
@@ -87,7 +87,7 @@ const OutlineButton = styled(SolidButton)<{ $subtype?: string }>`
         : `2px solid ${color.danger}`};
 
     &:hover {
-      color: ${color.text};
+      color: ${color.background};
       background-color: ${$subtype === 'primary'
         ? color.primary
         : $subtype === 'accent'
