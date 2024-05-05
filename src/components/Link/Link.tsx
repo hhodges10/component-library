@@ -8,13 +8,6 @@ export type LinkProps = {
   iconPosition?: 'left' | 'right';
 };
 
-const Paragraph = styled.p`
-  ${({ theme: { font, color } }) => css`
-    color: ${color.opposite};
-    font-size: ${font.md};
-  `}
-`;
-
 const StyledLink = styled.a`
   ${({ theme: { font, color } }) => css`
     text-decoration: underline;
@@ -73,14 +66,11 @@ function Link({
   iconPosition,
 }: LinkProps) {
   return (
-    <Paragraph>
-      Here is some normal text,&nbsp;
-      <StyledLink href={href} target={`_${target}`}>
-        {iconPosition === 'left' && icon}
-        <StyledSpan>{children}</StyledSpan>
-        {iconPosition === 'right' && icon}
-      </StyledLink>
-    </Paragraph>
+    <StyledLink href={href} target={`_${target}`}>
+      {iconPosition === 'left' && icon}
+      <StyledSpan>{children}</StyledSpan>
+      {iconPosition === 'right' && icon}
+    </StyledLink>
   );
 }
 
