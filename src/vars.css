@@ -24,5 +24,10 @@
   --color-dark-danger_dark: #e72326;
   --color-dark-danger_xtra_dark: #ca1619;
 
+  --font-sm: 1rem;
   --font-md: 1.25rem;
+  --font-lg: 2rem;
+  --font-xl: 3.25rem;
+  --font-family: 'Rubik', sans-serif;
+  --font-bold: 600;
 }
