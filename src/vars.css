@@ -4,15 +4,15 @@
   --color-light-background_variant: #cccccc;
   --color-dark-background_variant: #3d4366;
 
-  --color-light-primary: #1a7474;
-  --color-light-primary_dark: #135353;
-  --color-light-primary_xtra_dark: #053838;
-  --color-light-accent: #4f1fff;
-  --color-light-accent_dark: #2300a3;
-  --color-light-accent_xtra_dark: #160066;
-  --color-light-danger: #c11e1e;
-  --color-light-danger_dark: #7a1010;
-  --color-light-danger_xtra_dark: #580c0c;
+  --color-light-primary: #22577a;
+  --color-light-primary_dark: #1b445f;
+  --color-light-primary_xtra_dark: #122d40;
+  --color-light-accent: #c51b54;
+  --color-light-accent_dark: #a21645;
+  --color-light-accent_xtra_dark: #6c0f2e;
+  --color-light-danger: #c51b29;
+  --color-light-danger_dark: #90141e;
+  --color-light-danger_xtra_dark: #6c0f16;
 
   --color-dark-primary: #98d7d7;
   --color-dark-primary_dark: #6cc6c6;
