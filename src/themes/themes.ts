@@ -1,14 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
+import './../vars.css';
 
 export const GlobalStyles = createGlobalStyle`
   body {
     background-color: ${({ theme }) => theme.color.background};
+    font-family: ${({ theme }) => theme.font.family};
   }
 `;
 
 const defaultTheme = {
   font: {
+    family: 'var(--font-family)',
+    sm: 'var(--font-sm)',
     md: 'var(--font-md)',
+    lg: 'var(--font-lg)',
+    xl: 'var(--font-xl)',
+    bold: 'var(--font-bold)',
   },
 };
 

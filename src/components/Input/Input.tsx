@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type InputProps = {
   type?: 'underline' | 'outline';
@@ -13,46 +13,49 @@ const InputWrapper = styled.div`
 `;
 
 const UnderlineInput = styled.input<{ $subtype: string }>`
-  height: 48px;
-  width: 480px;
-  font-size: ${({ theme }) => theme.font.md};
-  border: none;
-  border-bottom: ${({ $subtype, theme }) =>
-    $subtype === 'primary'
-      ? `4px solid ${theme.color.primary}`
-      : `4px solid ${theme.color.accent}`};
-  border-radius: 3px;
-  padding: 6px 12px 0;
-  margin-top: 12px;
-  outline: none;
-  color: ${({ theme }) => theme.color.opposite};
-  background-color: ${({ theme }) => theme.color.backgroundVar};
+  ${({ theme: { font, color }, $subtype }) => css`
+    height: 48px;
+    width: 480px;
+    font-size: ${font.md};
+    border: none;
+    border-bottom: ${$subtype === 'primary'
+      ? `4px solid ${color.primary}`
+      : `4px solid ${color.accent}`};
+    border-radius: 3px;
+    padding: 6px 12px 0;
+    margin-top: 12px;
+    outline: none;
+    color: ${color.opposite};
+    background-color: ${color.backgroundVar};
 
-  &:focus {
-    outline: ${({ theme }) => `2px solid ${theme.color.accentFocusColor}`};
-    outline-offset: 2px;
-  }
+    &:focus {
+      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline-offset: 2px;
+    }
+  `}
 `;
 
 const Label = styled.label<{ $subtype: string }>`
-  position: absolute;
-  top: 30px;
-  left: 10px;
-  color: ${({ theme }) => theme.color.opposite};
-  font-family: 'Rubik', sans-serif;
-  font-size: 1.25rem;
-  opacity: 0.85;
-  transition: 0.2s ease all;
+  ${({ theme: { color } }) => css`
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    color: ${color.opposite};
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.25rem;
+    opacity: 0.85;
+    transition: 0.2s ease all;
 
-  &:hover {
-    cursor: text;
-  }
+    &:hover {
+      cursor: text;
+    }
 
-  ${UnderlineInput}:is(:focus, :not(:placeholder-shown)) ~ & {
-    top: -20px;
-    opacity: 1;
-    font-size: 1.1rem;
-  }
+    ${UnderlineInput}:is(:focus, :not(:placeholder-shown)) ~ & {
+      top: -20px;
+      opacity: 1;
+      font-size: 1.1rem;
+    }
+  `}
 `;
 
 const OutlineInput = styled(UnderlineInput)`
