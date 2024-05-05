@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6';
 import Link, { LinkProps } from './Link';
 import React from 'react';
+import styled, { css } from 'styled-components';
 
 const meta: Meta<typeof Link> = {
   title: 'Components/Link',
@@ -21,15 +22,25 @@ export default meta;
 
 type Story = StoryObj<typeof Link>;
 
+const Paragraph = styled.p`
+  ${({ theme: { font, color } }) => css`
+    color: ${color.opposite};
+    font-size: ${font.md};
+  `}
+`;
+
 const LinkTemplate = (args: LinkProps) => {
   let icon: React.ReactNode = null;
   if (args.icon) {
     icon = args.icon === 'right-arrow' ? <FaChevronRight /> : <FaChevronLeft />;
   }
   return (
-    <Link {...args} icon={icon}>
-      {args.children}
-    </Link>
+    <Paragraph>
+      Here is some normal text,&nbsp;
+      <Link {...args} icon={icon}>
+        {args.children}
+      </Link>
+    </Paragraph>
   );
 };
 
