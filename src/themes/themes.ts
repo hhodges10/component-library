@@ -22,6 +22,7 @@ const defaultTheme = {
 export const lightTheme = {
   dark: 'var(--color-dark)',
   light: 'var(--color-light)',
+  lightVar: 'var(--color-light)',
   background: 'var(--color-light)',
   backgroundVar: 'var(--color-light-background_variant)',
   text: 'var(--color-dark)',
@@ -30,6 +31,7 @@ export const lightTheme = {
   primary: 'var(--color-light-primary)',
   primaryDark: 'var(--color-light-primary_dark)',
   primaryXDark: 'var(--color-light-primary_xtra_dark)',
+  accentLight: 'var(--color-light-accent_light)',
   accent: 'var(--color-light-accent)',
   accentDark: 'var(--color-light-accent_dark)',
   accentXDark: 'var(--color-light-accent_xtra_dark)',
@@ -41,6 +43,7 @@ export const lightTheme = {
 export const darkTheme = {
   dark: 'var(--color-dark)',
   light: 'var(--color-light)',
+  lightVar: 'var(--color-light-background_variant)',
   background: 'var(--color-dark)',
   backgroundVar: 'var(--color-dark-background_variant)',
   text: 'var(--color-light)',
@@ -49,6 +52,7 @@ export const darkTheme = {
   primary: 'var(--color-dark-primary)',
   primaryDark: 'var(--color-dark-primary_dark)',
   primaryXDark: 'var(--color-dark-primary_xtra_dark)',
+  accentLight: 'var(--color-dark-accent_light)',
   accent: 'var(--color-dark-accent)',
   accentDark: 'var(--color-dark-accent_dark)',
   accentXDark: 'var(--color-dark-accent_xtra_dark)',
