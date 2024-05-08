@@ -15,20 +15,20 @@ const Hidden = styled(HiddenInput)``;
 
 const StyledRadio = styled.div<{ $checked: boolean; $disabled: boolean }>`
   ${({ theme: { color }, $checked, $disabled }) => css`
-    width: 1.15em;
-    height: 1.15em;
+    width: 0.9em;
+    height: 0.9em;
     border-radius: 50%;
-    border: 0.15em solid ${color.text};
+    border: 0.1em solid ${color.textVar};
     transition: all 150ms;
-    transform: translateY(-0.2em);
+    transform: translateY(-0.11em);
     display: grid;
     place-content: center;
     opacity: ${$disabled ? 0.75 : 1};
 
     &::before {
       content: '';
-      width: 0.8em;
-      height: 0.8em;
+      width: 0.7em;
+      height: 0.7em;
       border-radius: 50%;
       transform: ${$checked ? 'scale(1)' : 'scale(0)'};
       transition: transform 150ms ease-in-out;
@@ -51,9 +51,8 @@ const StyledRadio = styled.div<{ $checked: boolean; $disabled: boolean }>`
 `;
 
 const LabelSpan = styled.span<{ $disabled: boolean }>`
-  ${({ theme: { font, color }, $disabled }) => css`
+  ${({ theme: { color }, $disabled }) => css`
     color: ${color.text};
-    font-size: ${font.md};
     margin-left: 8px;
     opacity: ${$disabled ? 0.6 : 1};
     user-select: none;
@@ -72,6 +71,12 @@ const RadioWrapper = styled.div<{ $disabled: boolean }>`
   `}
 `;
 
+const Label = styled.label`
+  ${({ theme: { font } }) => css`
+    font-size: ${font.md};
+  `}
+`;
+
 function Radio({
   checked,
   value,
@@ -82,7 +87,7 @@ function Radio({
   ...props
 }: RadioProps) {
   return (
-    <label className={className}>
+    <Label className={className}>
       <RadioWrapper $disabled={disabled}>
         <Hidden
           type="radio"
@@ -96,7 +101,7 @@ function Radio({
         <StyledRadio $checked={checked} $disabled={disabled}></StyledRadio>
       </RadioWrapper>
       <LabelSpan $disabled={disabled}>{label}</LabelSpan>
-    </label>
+    </Label>
   );
 }
 
