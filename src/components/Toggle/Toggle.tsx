@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import HiddenInput from '../utilities/HiddenInput';
 
 export type ToggleProps = {
   checked: boolean;
@@ -10,21 +11,6 @@ export type ToggleProps = {
   props?: any[];
   onChange: (event: any) => void;
 };
-
-// Hide checkbox visually but remain accessible to screen readers.
-// Source: https://polished.js.org/docs/#hidevisually
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-`;
 
 const Icon = styled.svg<{ $size: string }>`
   ${({ theme: { color }, $size }) => css`
@@ -88,7 +74,7 @@ const ToggleBackground = styled.div<{
       transition: left 150ms linear;
     }
 
-    ${HiddenCheckbox}:focus + & {
+    .toggle-checkbox:focus + & {
       outline: ${`2px solid ${color.accentFocusColor}`};
       outline-offset: 2px;
     }
@@ -140,12 +126,14 @@ function Toggle({
     <div className={className}>
       <Label>
         <ToggleWrapper $disabled={disabled}>
-          <HiddenCheckbox
+          <HiddenInput
+            className="toggle-checkbox"
+            type="checkbox"
             checked={checked}
             disabled={disabled}
             onChange={onChange}
             {...props}
-          ></HiddenCheckbox>
+          ></HiddenInput>
           <ToggleBackground
             $checked={checked}
             $disabled={disabled}
