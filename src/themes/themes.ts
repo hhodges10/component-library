@@ -16,6 +16,7 @@ const defaultTheme = {
     lg: 'var(--font-lg)',
     xl: 'var(--font-xl)',
     bold: 'var(--font-bold)',
+    light: 'var(--font-light)',
   },
 };
 
@@ -26,8 +27,9 @@ export const lightTheme = {
   background: 'var(--color-light)',
   backgroundVar: 'var(--color-light-background_variant)',
   text: 'var(--color-dark)',
-  focusColor: 'rgba(79, 31, 255, 0.6)',
-  accentFocusColor: 'rgba(63, 162, 162, 0.6)',
+  textVar: 'var(--color-dark-background_variant)',
+  focusColor: 'rgba(71, 131, 215, 0.6)',
+  accentFocusColor: 'rgba(215, 29, 91, 0.6)',
   primary: 'var(--color-light-primary)',
   primaryDark: 'var(--color-light-primary_dark)',
   primaryXDark: 'var(--color-light-primary_xtra_dark)',
@@ -47,6 +49,7 @@ export const darkTheme = {
   background: 'var(--color-dark)',
   backgroundVar: 'var(--color-dark-background_variant)',
   text: 'var(--color-light)',
+  textVar: 'var(--color-light-background_variant)',
   focusColor: 'rgba(159, 133, 255, 0.9)',
   accentFocusColor: 'rgba(196, 232, 232, 0.8)',
   primary: 'var(--color-dark-primary)',

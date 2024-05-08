@@ -30,7 +30,7 @@ const ToggleIndicator = styled.div<{ $checked: boolean; $size: string }>`
     left: 3px;
     height: ${$size === 'md' ? '18px' : $size === 'sm' ? '14px' : '24px'};
     width: ${$size === 'md' ? '18px' : $size === 'sm' ? '14px' : '24px'};
-    border-radius: 2px;
+    border-radius: 50px;
     background-color: ${color.lightVar};
     box-shadow: rgba(23, 25, 38, 0.3) 0px 0px 2px 2px;
 
@@ -64,7 +64,7 @@ const ToggleBackground = styled.div<{
     position: relative;
     height: ${$size === 'md' ? '24px' : $size === 'sm' ? '20px' : '30px'};
     width: ${$size === 'md' ? '46px' : $size === 'sm' ? '42px' : '60px'};
-    border-radius: 4px;
+    border-radius: 50px;
     background-color: ${$checked ? color.accent : color.backgroundVar};
     font-family: ${font.family};
     opacity: ${$disabled ? 0.8 : 1};
