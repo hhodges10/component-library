@@ -1,13 +1,11 @@
 import styled, { css } from 'styled-components';
-import HiddenInput from '../utilities/HiddenInput';
+import HiddenInput from '../../utilities/HiddenInput';
+import { ComponentPropsWithRef } from 'react';
 
-export type CheckboxProps = {
+export type CheckboxProps = ComponentPropsWithRef<'input'> & {
   checked: boolean;
   label: string;
-  props?: any[];
-  className?: string;
   disabled?: boolean;
-  onChange: (event: any) => void;
 };
 
 const Icon = styled.svg`
@@ -80,7 +78,6 @@ function Checkbox({
   label = 'Checkbox label',
   disabled = false,
   className,
-  onChange,
   ...props
 }: CheckboxProps) {
   return (
@@ -88,11 +85,10 @@ function Checkbox({
       <Label>
         <CheckboxWrapper $disabled={disabled}>
           <HiddenInput
-            className="checkbox"
             type="checkbox"
+            className="checkbox"
             checked={checked}
             disabled={disabled}
-            onChange={onChange}
             {...props}
           ></HiddenInput>
           <StyledCheckbox $checked={checked} $disabled={disabled}>

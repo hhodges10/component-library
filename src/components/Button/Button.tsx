@@ -1,11 +1,10 @@
-import { MouseEventHandler } from 'react';
+import { ComponentPropsWithRef } from 'react';
 import styled, { css } from 'styled-components';
 
-export type ButtonProps = {
-  label: string;
-  type: 'solid' | 'outline';
+export type ButtonProps = ComponentPropsWithRef<'button'> & {
+  innerText: string;
+  customType: 'solid' | 'outline';
   subtype: 'primary' | 'accent' | 'destructive';
-  onClick?: MouseEventHandler;
 };
 
 const SolidButton = styled.button<{ $subtype?: string }>`
@@ -125,18 +124,18 @@ const OutlineButton = styled(SolidButton)<{ $subtype?: string }>`
   `}
 `;
 
-function Button({ type, subtype, label, onClick }: ButtonProps) {
-  switch (type) {
+function Button({ customType, subtype, innerText, ...props }: ButtonProps) {
+  switch (customType) {
     case 'solid':
       return (
-        <SolidButton onClick={onClick} $subtype={subtype}>
-          {label}
+        <SolidButton $subtype={subtype} {...props}>
+          {innerText}
         </SolidButton>
       );
     case 'outline':
       return (
-        <OutlineButton onClick={onClick} $subtype={subtype}>
-          {label}
+        <OutlineButton $subtype={subtype} {...props}>
+          {innerText}
         </OutlineButton>
       );
   }

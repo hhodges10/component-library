@@ -5,6 +5,7 @@ import { FaFaceSmile, FaFaceFrown } from 'react-icons/fa6';
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
   component: Chip,
+  tags: ['autodocs'],
   argTypes: {
     icon: {
       options: ['smile', 'frown'],

@@ -1,10 +1,11 @@
+import { ComponentPropsWithRef } from 'react';
 import styled, { css } from 'styled-components';
 
-type InputProps = {
+type InputProps = ComponentPropsWithRef<'input'> & {
+  inputLabel: string;
   type?: 'underline' | 'outline';
   subtype?: 'primary' | 'accent';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  required?: boolean;
+  inputSize?: 'sm' | 'md' | 'lg' | 'xl';
 };
 
 const InputWrapper = styled.div`
@@ -71,7 +72,9 @@ const OutlineInput = styled(UnderlineInput)`
 function Input({
   type = 'underline',
   subtype = 'primary',
-  required = false,
+  inputSize = 'md',
+  inputLabel,
+  ...props
 }: InputProps) {
   return (
     <InputWrapper>
@@ -79,19 +82,19 @@ function Input({
         <UnderlineInput
           id="input"
           $subtype={subtype}
-          required={required}
           placeholder=" "
+          {...props}
         ></UnderlineInput>
       ) : (
         <OutlineInput
           id="input"
           $subtype={subtype}
-          required={required}
           placeholder=" "
+          {...props}
         ></OutlineInput>
       )}
       <Label id="label" htmlFor="input" $subtype={subtype}>
-        First Name
+        {inputLabel}
       </Label>
     </InputWrapper>
   );

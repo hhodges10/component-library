@@ -1,17 +1,10 @@
-import { createGlobalStyle } from 'styled-components';
 import './../vars.css';
-
-export const GlobalStyles = createGlobalStyle`
-  body {
-    background-color: ${({ theme }) => theme.color.background};
-    font-family: ${({ theme }) => theme.font.family};
-  }
-`;
 
 const defaultTheme = {
   font: {
     family: 'var(--font-family)',
     sm: 'var(--font-sm)',
+    smd: 'var(--font-smd)',
     md: 'var(--font-md)',
     lg: 'var(--font-lg)',
     xl: 'var(--font-xl)',
@@ -21,10 +14,10 @@ const defaultTheme = {
 };
 
 export const lightTheme = {
-  dark: 'var(--color-dark)',
-  light: 'var(--color-light)',
+  dark: '#171926',
+  light: '#edf0f5',
   lightVar: 'var(--color-light)',
-  background: 'var(--color-light)',
+  background: '#edf0f5',
   backgroundVar: 'var(--color-light-background_variant)',
   text: 'var(--color-dark)',
   textVar: 'var(--color-dark-background_variant)',
@@ -43,10 +36,10 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  dark: 'var(--color-dark)',
-  light: 'var(--color-light)',
+  dark: '#171926',
+  light: '#edf0f5',
   lightVar: 'var(--color-light-background_variant)',
-  background: 'var(--color-dark)',
+  background: '#171926',
   backgroundVar: 'var(--color-dark-background_variant)',
   text: 'var(--color-light)',
   textVar: 'var(--color-light-background_variant)',

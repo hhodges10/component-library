@@ -1,8 +1,8 @@
+import { ComponentPropsWithRef } from 'react';
 import styled, { css } from 'styled-components';
 
-export type LinkProps = {
+export type LinkProps = ComponentPropsWithRef<'a'> & {
   href: string;
-  children: React.ReactNode;
   target?: 'blank' | 'self' | 'parent' | 'top';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -64,9 +64,10 @@ function Link({
   target = 'self',
   icon,
   iconPosition,
+  ...props
 }: LinkProps) {
   return (
-    <StyledLink href={href} target={`_${target}`}>
+    <StyledLink href={href} target={`_${target}`} {...props}>
       {iconPosition === 'left' && icon}
       <StyledSpan>{children}</StyledSpan>
       {iconPosition === 'right' && icon}

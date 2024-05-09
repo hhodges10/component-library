@@ -5,18 +5,9 @@ import React from 'react';
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
   component: Checkbox,
+  tags: ['autodocs'],
   argTypes: {
     onChange: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-    props: {
       table: {
         disable: true,
       },

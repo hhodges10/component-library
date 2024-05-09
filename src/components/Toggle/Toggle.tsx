@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
-import HiddenInput from '../utilities/HiddenInput';
+import HiddenInput from '../../utilities/HiddenInput';
+import { ComponentPropsWithRef } from 'react';
 
-export type ToggleProps = {
+export type ToggleProps = ComponentPropsWithRef<'input'> & {
   checked: boolean;
   label: string;
   withIconIndicator?: boolean;
   disabled?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  inputSize?: 'sm' | 'md' | 'lg';
   className?: string;
-  props?: any[];
-  onChange: (event: any) => void;
+  value?: string;
 };
 
 const Icon = styled.svg<{ $size: string }>`
@@ -116,10 +116,9 @@ function Toggle({
   checked,
   label = 'Toggle Switch Label',
   disabled = false,
-  size = 'md',
+  inputSize: size = 'md',
   withIconIndicator: withIcon = true,
   className,
-  onChange,
   ...props
 }: ToggleProps) {
   return (
@@ -127,11 +126,10 @@ function Toggle({
       <Label>
         <ToggleWrapper $disabled={disabled}>
           <HiddenInput
-            className="toggle-checkbox"
             type="checkbox"
+            className="toggle-checkbox"
             checked={checked}
             disabled={disabled}
-            onChange={onChange}
             {...props}
           ></HiddenInput>
           <ToggleBackground

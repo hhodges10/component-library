@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 const meta: Meta<typeof Link> = {
   title: 'Components/Link',
   component: Link,
+  tags: ['autodocs'],
   argTypes: {
     children: {
       name: 'Link Text',

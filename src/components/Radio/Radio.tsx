@@ -1,14 +1,11 @@
 import styled, { css } from 'styled-components';
-import HiddenInput from '../utilities/HiddenInput';
+import HiddenInput from '../../utilities/HiddenInput';
+import { ComponentPropsWithRef } from 'react';
 
-export type RadioProps = {
+export type RadioProps = ComponentPropsWithRef<'input'> & {
   checked: boolean;
-  value: string;
   label?: string;
   disabled?: boolean;
-  className?: string;
-  props?: any[];
-  onChange: (event: any) => void;
 };
 
 const Hidden = styled(HiddenInput)``;
@@ -79,11 +76,9 @@ const Label = styled.label`
 
 function Radio({
   checked,
-  value,
   label = 'Radio button label',
   disabled = false,
   className,
-  onChange,
   ...props
 }: RadioProps) {
   return (
@@ -92,10 +87,8 @@ function Radio({
         <Hidden
           type="radio"
           className="radio"
-          value={value}
           checked={checked}
           disabled={disabled}
-          onChange={onChange}
           {...props}
         ></Hidden>
         <StyledRadio $checked={checked} $disabled={disabled}></StyledRadio>
