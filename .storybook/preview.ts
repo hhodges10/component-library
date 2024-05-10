@@ -1,29 +1,26 @@
-import type { Preview, ReactRenderer } from '@storybook/react';
-import { withThemeFromJSXProvider } from '@storybook/addon-themes';
-import { ThemeProvider } from 'styled-components';
-import theme, { GlobalStyles } from './../src/themes/themes';
+import { themes } from '@storybook/theming';
+import { DocsContainer } from './DocsContainer';
+import type { Preview } from '@storybook/react';
+import { decorators } from './CustomDecorator';
+import './../src/index.css';
+
+export const parameters = {
+  darkMode: {
+    dark: { ...themes.dark, appPreviewBg: '#171926', appBg: '#050508' },
+    light: {
+      ...themes.dark,
+      appPreviewBg: '#edf0f5',
+      appBg: '#050508',
+    },
+  },
+  docs: {
+    container: DocsContainer,
+  },
+  layout: 'centered',
+};
 
 const preview: Preview = {
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-    layout: 'centered',
-  },
-  decorators: [
-    withThemeFromJSXProvider<ReactRenderer>({
-      themes: {
-        light: theme.light,
-        dark: theme.dark,
-      },
-      defaultTheme: 'light',
-      Provider: ThemeProvider,
-      GlobalStyles: GlobalStyles,
-    }),
-  ],
+  decorators: decorators,
 };
 
 export default preview;

@@ -4,8 +4,9 @@ import Button, { ButtonProps } from './Button';
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
   argTypes: {
-    label: {
+    innerText: {
       control: { type: 'text' },
     },
   },
@@ -16,8 +17,8 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 const primaryButton: ButtonProps = {
-  label: 'primary',
-  type: 'solid',
+  innerText: 'primary',
+  customType: 'solid',
   subtype: 'primary',
   onClick: (event: any) => {
     console.log('Button clicked: ', event);
@@ -26,13 +27,13 @@ const primaryButton: ButtonProps = {
 
 const accentButton: ButtonProps = {
   ...primaryButton,
-  label: 'accent',
+  innerText: 'accent',
   subtype: 'accent',
 };
 
 const destructiveButton: ButtonProps = {
   ...primaryButton,
-  label: 'destructive',
+  innerText: 'destructive',
   subtype: 'destructive',
 };
 
@@ -51,11 +52,11 @@ export const Default: Story = {
   },
 };
 
-const primaryOutline: ButtonProps = { ...primaryButton, type: 'outline' };
-const accentOutline: ButtonProps = { ...accentButton, type: 'outline' };
+const primaryOutline: ButtonProps = { ...primaryButton, customType: 'outline' };
+const accentOutline: ButtonProps = { ...accentButton, customType: 'outline' };
 const destructiveOutline: ButtonProps = {
   ...destructiveButton,
-  type: 'outline',
+  customType: 'outline',
 };
 
 export const Outline: Story = {

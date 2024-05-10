@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
   component: Radio,
+  tags: ['autodocs'],
   argTypes: {
     onChange: {
       table: {
@@ -13,11 +14,6 @@ const meta: Meta<typeof Radio> = {
       },
     },
     className: {
-      table: {
-        disable: true,
-      },
-    },
-    props: {
       table: {
         disable: true,
       },

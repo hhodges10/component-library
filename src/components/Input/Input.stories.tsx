@@ -4,6 +4,14 @@ import Input from './Input';
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
+  tags: ['autodocs'],
+  argTypes: {
+    onChange: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export default meta;
@@ -11,15 +19,21 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  args: {
-    type: 'underline',
-    subtype: 'primary',
-  },
+  render: (args) => (
+    <div style={{ width: '480px' }}>
+      <Input {...args} inputLabel={args.inputLabel || 'First Name'}></Input>
+    </div>
+  ),
 };
 
 export const Outline: Story = {
-  args: {
-    type: 'outline',
-    subtype: 'primary',
-  },
+  render: (args) => (
+    <div style={{ width: '480px' }}>
+      <Input
+        {...args}
+        inputLabel={args.inputLabel || 'First Name'}
+        type="outline"
+      ></Input>
+    </div>
+  ),
 };

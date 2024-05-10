@@ -1,27 +1,27 @@
 import styled, { css } from 'styled-components';
-import HiddenInput from '../utilities/HiddenInput';
+import HiddenInput from '../../utilities/HiddenInput';
+import { ComponentPropsWithRef } from 'react';
 
-export type ToggleProps = {
+export type ToggleProps = ComponentPropsWithRef<'input'> & {
   checked: boolean;
   label: string;
   withIconIndicator?: boolean;
   disabled?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  inputSize?: 'sm' | 'md' | 'lg';
   className?: string;
-  props?: any[];
-  onChange: (event: any) => void;
+  value?: string;
 };
 
 const Icon = styled.svg<{ $size: string }>`
   ${({ theme: { color }, $size }) => css`
-    fill: ${color.dark};
+    fill: ${color.navy};
     width: ${$size === 'md' ? '15px' : $size === 'sm' ? '10px' : '21px'};
     height: ${$size === 'md' ? '15px' : $size === 'sm' ? '10px' : '21px'};
   `}
 `;
 
 const ToggleIndicator = styled.div<{ $checked: boolean; $size: string }>`
-  ${({ theme: { color }, $checked, $size }) => css`
+  ${({ theme: { color, border }, $checked, $size }) => css`
     position: absolute;
     display: inline-flex;
     align-items: center;
@@ -30,8 +30,8 @@ const ToggleIndicator = styled.div<{ $checked: boolean; $size: string }>`
     left: 3px;
     height: ${$size === 'md' ? '18px' : $size === 'sm' ? '14px' : '24px'};
     width: ${$size === 'md' ? '18px' : $size === 'sm' ? '14px' : '24px'};
-    border-radius: 50px;
-    background-color: ${color.lightVar};
+    border-radius: ${border.radiusRound};
+    background-color: ${color.grey};
     box-shadow: rgba(23, 25, 38, 0.3) 0px 0px 2px 2px;
 
     ${Icon} {
@@ -60,13 +60,18 @@ const ToggleBackground = styled.div<{
   $disabled: boolean;
   $size: string;
 }>`
-  ${({ theme: { font, color }, $disabled, $checked, $size }) => css`
+  ${({
+    theme: { typography, color, border },
+    $disabled,
+    $checked,
+    $size,
+  }) => css`
     position: relative;
     height: ${$size === 'md' ? '24px' : $size === 'sm' ? '20px' : '30px'};
     width: ${$size === 'md' ? '46px' : $size === 'sm' ? '42px' : '60px'};
-    border-radius: 50px;
-    background-color: ${$checked ? color.accent : color.backgroundVar};
-    font-family: ${font.family};
+    border-radius: ${border.radiusRound};
+    background-color: ${$checked ? color.accentLight : color.backgroundVar};
+    font-family: ${typography.fontFamily};
     opacity: ${$disabled ? 0.8 : 1};
 
     ${ToggleIndicator} {
@@ -75,7 +80,7 @@ const ToggleBackground = styled.div<{
     }
 
     .toggle-checkbox:focus + & {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
@@ -99,9 +104,9 @@ const Label = styled.label`
 `;
 
 const LabelSpan = styled.span<{ $disabled: boolean }>`
-  ${({ theme: { font, color }, $disabled }) => css`
+  ${({ theme: { typography, color }, $disabled }) => css`
     color: ${color.text};
-    font-size: ${font.md};
+    font-size: ${typography.sizeMedium};
     margin-left: 8px;
     opacity: ${$disabled ? 0.6 : 1};
     user-select: none;
@@ -116,10 +121,9 @@ function Toggle({
   checked,
   label = 'Toggle Switch Label',
   disabled = false,
-  size = 'md',
+  inputSize: size = 'md',
   withIconIndicator: withIcon = true,
   className,
-  onChange,
   ...props
 }: ToggleProps) {
   return (
@@ -127,11 +131,10 @@ function Toggle({
       <Label>
         <ToggleWrapper $disabled={disabled}>
           <HiddenInput
-            className="toggle-checkbox"
             type="checkbox"
+            className="toggle-checkbox"
             checked={checked}
             disabled={disabled}
-            onChange={onChange}
             {...props}
           ></HiddenInput>
           <ToggleBackground

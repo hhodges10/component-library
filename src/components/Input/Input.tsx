@@ -1,27 +1,28 @@
+import { ComponentPropsWithRef } from 'react';
 import styled, { css } from 'styled-components';
 
-type InputProps = {
+type InputProps = ComponentPropsWithRef<'input'> & {
+  inputLabel: string;
   type?: 'underline' | 'outline';
   subtype?: 'primary' | 'accent';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  required?: boolean;
+  inputSize?: 'sm' | 'md' | 'lg' | 'xl';
 };
 
 const InputWrapper = styled.div`
   position: relative;
-  width: 480px;
+  width: 100%;
 `;
 
 const UnderlineInput = styled.input<{ $subtype: string }>`
-  ${({ theme: { font, color }, $subtype }) => css`
+  ${({ theme: { typography, color, border }, $subtype }) => css`
+    width: 100%;
     height: 48px;
-    width: 480px;
-    font-size: ${font.md};
+    font-size: ${typography.sizeMedium};
     border: none;
     border-bottom: ${$subtype === 'primary'
-      ? `4px solid ${color.primary}`
-      : `4px solid ${color.accent}`};
-    border-radius: 3px;
+      ? `4px solid ${color.primaryLight}`
+      : `4px solid ${color.accentLight}`};
+    border-radius: ${border.radiusSmall};
     padding: 6px 12px 0;
     margin-top: 12px;
     outline: none;
@@ -29,20 +30,19 @@ const UnderlineInput = styled.input<{ $subtype: string }>`
     background-color: ${color.backgroundVar};
 
     &:focus {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
   `}
 `;
 
 const Label = styled.label<{ $subtype: string }>`
-  ${({ theme: { color } }) => css`
+  ${({ theme: { typography, color } }) => css`
     position: absolute;
     top: 30px;
     left: 10px;
     color: ${color.text};
-    font-family: 'Rubik', sans-serif;
-    font-size: 1.25rem;
+    font-size: ${typography.sizeMedium};
     opacity: 0.85;
     transition: 0.2s ease all;
 
@@ -61,17 +61,23 @@ const Label = styled.label<{ $subtype: string }>`
 const OutlineInput = styled(UnderlineInput)`
   border: ${({ $subtype, theme }) =>
     $subtype === 'primary'
-      ? `4px solid ${theme.color.primary}`
-      : `4px solid ${theme.color.accent}`};
+      ? `1px solid ${theme.color.primaryLight}`
+      : `1px solid ${theme.color.accentLight}`};
+  border-bottom: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
+      ? `4px solid ${theme.color.primaryLight}`
+      : `4px solid ${theme.color.accentLight}`};
   + ${Label} {
-    top: 32px;
+    top: 31px;
   }
 `;
 
 function Input({
   type = 'underline',
   subtype = 'primary',
-  required = false,
+  inputSize = 'md',
+  inputLabel,
+  ...props
 }: InputProps) {
   return (
     <InputWrapper>
@@ -79,19 +85,19 @@ function Input({
         <UnderlineInput
           id="input"
           $subtype={subtype}
-          required={required}
           placeholder=" "
+          {...props}
         ></UnderlineInput>
       ) : (
         <OutlineInput
           id="input"
           $subtype={subtype}
-          required={required}
           placeholder=" "
+          {...props}
         ></OutlineInput>
       )}
       <Label id="label" htmlFor="input" $subtype={subtype}>
-        First Name
+        {inputLabel}
       </Label>
     </InputWrapper>
   );

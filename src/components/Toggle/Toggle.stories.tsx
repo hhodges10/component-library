@@ -5,6 +5,7 @@ import React from 'react';
 const meta: Meta<typeof Toggle> = {
   title: 'Components/Toggle',
   component: Toggle,
+  tags: ['autodocs'],
   argTypes: {
     onChange: {
       table: {
@@ -16,11 +17,6 @@ const meta: Meta<typeof Toggle> = {
         disable: true,
       },
     },
-    props: {
-      table: {
-        disable: true,
-      },
-    },
     checked: {
       table: {
         disable: true,
@@ -28,6 +24,11 @@ const meta: Meta<typeof Toggle> = {
     },
     disabled: {
       control: { type: 'boolean' },
+    },
+    value: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
