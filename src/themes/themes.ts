@@ -1,71 +1,54 @@
-import './../vars.css';
+import * as colors from './colors';
+import * as border from './border';
+import * as typography from './typography';
 
-const defaultTheme = {
-  font: {
-    family: 'var(--font-family)',
-    sm: 'var(--font-sm)',
-    smd: 'var(--font-smd)',
-    md: 'var(--font-md)',
-    lg: 'var(--font-lg)',
-    xl: 'var(--font-xl)',
-    bold: 'var(--font-bold)',
-    light: 'var(--font-light)',
-  },
+const themeDarkColor = {
+  background: colors.navy,
+  backgroundVar: colors.navyLight,
+  text: colors.grey,
+  textVar: colors.greyDark,
+  primaryLight: colors.tealLight,
+  primary: colors.teal,
+  primaryDark: colors.tealDark,
+  accentLight: colors.purpleLight,
+  accent: colors.purple,
+  accentDark: colors.purpleDark,
+  dangerLight: colors.red2Light,
+  danger: colors.red2,
+  dangerDark: colors.red2Dark,
+  primaryFocus: colors.tealTransparent,
+  accentFocus: colors.purpleTransparent,
+  navy: colors.navy,
+  grey: colors.grey,
+  trueWhite: colors.white,
 };
 
-export const lightTheme = {
-  dark: '#171926',
-  light: '#edf0f5',
-  lightVar: 'var(--color-light)',
-  background: '#edf0f5',
-  backgroundVar: 'var(--color-light-background_variant)',
-  text: 'var(--color-dark)',
-  textVar: 'var(--color-dark-background_variant)',
-  focusColor: 'rgba(71, 131, 215, 0.6)',
-  accentFocusColor: 'rgba(215, 29, 91, 0.6)',
-  primary: 'var(--color-light-primary)',
-  primaryDark: 'var(--color-light-primary_dark)',
-  primaryXDark: 'var(--color-light-primary_xtra_dark)',
-  accentLight: 'var(--color-light-accent_light)',
-  accent: 'var(--color-light-accent)',
-  accentDark: 'var(--color-light-accent_dark)',
-  accentXDark: 'var(--color-light-accent_xtra_dark)',
-  danger: 'var(--color-light-danger)',
-  dangerDark: 'var(--color-light-danger_dark)',
-  dangerXDark: 'var(--color-light-danger_xtra_dark)',
+const themeLightColor = {
+  background: colors.grey,
+  backgroundVar: colors.greyDark,
+  text: colors.navy,
+  textVar: colors.navyLight,
+  primaryLight: colors.pinkLight,
+  primary: colors.pink,
+  primaryDark: colors.pinkDark,
+  accentLight: colors.blueLight,
+  accent: colors.blue,
+  accentDark: colors.blueDark,
+  dangerLight: colors.red1Light,
+  danger: colors.red1,
+  dangerDark: colors.red1Dark,
+  primaryFocus: colors.pinkTransparent,
+  accentFocus: colors.blueTransparent,
+  navy: colors.navy,
+  grey: colors.grey,
+  trueWhite: colors.white,
 };
 
-export const darkTheme = {
-  dark: '#171926',
-  light: '#edf0f5',
-  lightVar: 'var(--color-light-background_variant)',
-  background: '#171926',
-  backgroundVar: 'var(--color-dark-background_variant)',
-  text: 'var(--color-light)',
-  textVar: 'var(--color-light-background_variant)',
-  focusColor: 'rgba(159, 133, 255, 0.9)',
-  accentFocusColor: 'rgba(196, 232, 232, 0.8)',
-  primary: 'var(--color-dark-primary)',
-  primaryDark: 'var(--color-dark-primary_dark)',
-  primaryXDark: 'var(--color-dark-primary_xtra_dark)',
-  accentLight: 'var(--color-dark-accent_light)',
-  accent: 'var(--color-dark-accent)',
-  accentDark: 'var(--color-dark-accent_dark)',
-  accentXDark: 'var(--color-dark-accent_xtra_dark)',
-  danger: 'var(--color-dark-danger)',
-  dangerDark: 'var(--color-dark-danger_dark)',
-  dangerXDark: 'var(--color-dark-danger_xtra_dark)',
-};
-
-const theme = {
-  dark: {
-    color: darkTheme,
-    ...defaultTheme,
-  },
-  light: {
-    color: lightTheme,
-    ...defaultTheme,
-  },
-};
+const theme = (mode: string) => ({
+  color: mode === 'dark' ? themeDarkColor : themeLightColor,
+  border: { ...border },
+  mode: mode,
+  typography: { ...typography },
+});
 
 export default theme;

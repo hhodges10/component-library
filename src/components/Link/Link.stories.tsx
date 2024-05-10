@@ -24,9 +24,9 @@ export default meta;
 type Story = StoryObj<typeof Link>;
 
 const Paragraph = styled.p`
-  ${({ theme: { font, color } }) => css`
+  ${({ theme: { typography, color } }) => css`
     color: ${color.text};
-    font-size: ${font.md};
+    font-size: ${typography.sizeMedium};
   `}
 `;
 

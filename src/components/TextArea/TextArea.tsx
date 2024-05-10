@@ -4,16 +4,16 @@ import styled, { css } from 'styled-components';
 export type TextAreaProps = ComponentPropsWithRef<'textarea'> & {};
 
 const StyledTextArea = styled.textarea`
-  ${({ theme: { font, color } }) => css`
+  ${({ theme: { typography, color, border } }) => css`
     width: 100%;
     height: 6rem;
-    font-family: ${font.family};
-    font-size: ${font.smd};
+    font-family: ${typography.fontFamily};
+    font-size: ${typography.sizeSmedium};
     color: ${color.text};
     background-color: ${color.backgroundVar};
     padding: 0.5rem;
-    border: 4px solid ${color.primary};
-    border-radius: 0.25rem;
+    border: 4px solid ${color.primaryLight};
+    border-radius: ${border.radiusSmall};
     resize: none;
   `}
 `;

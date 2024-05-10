@@ -23,10 +23,3 @@ h1 {
   font-size: 3.25rem;
   line-height: 1.1;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--color-dark);
-    background-color: var(--color-light);
-  }
-}

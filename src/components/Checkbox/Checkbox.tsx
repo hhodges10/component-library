@@ -10,29 +10,29 @@ export type CheckboxProps = ComponentPropsWithRef<'input'> & {
 
 const Icon = styled.svg`
   ${({ theme: { color } }) => css`
-    fill: ${color.light};
+    fill: ${color.grey};
     width: 15px;
     height: 15px;
   `}
 `;
 
 const StyledCheckbox = styled.div<{ $checked: boolean; $disabled: boolean }>`
-  ${({ theme: { color }, $checked, $disabled }) => css`
+  ${({ theme: { color, border }, $checked, $disabled }) => css`
     display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 20px;
     height: 20px;
-    border-radius: 2px;
+    border-radius: ${border.radiusSmall};
     background-color: ${$disabled
-      ? color.focusColor
+      ? color.accentFocus
       : $checked
-        ? color.accentXDark
+        ? color.accentDark
         : color.accentLight};
     transition: all 150ms;
 
     .checkbox:focus + & {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`2px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
@@ -52,9 +52,9 @@ const Label = styled.label`
 `;
 
 const LabelSpan = styled.span<{ $disabled: boolean }>`
-  ${({ theme: { font, color }, $disabled }) => css`
+  ${({ theme: { typography, color }, $disabled }) => css`
     color: ${color.text};
-    font-size: ${font.md};
+    font-size: ${typography.sizeMedium};
     margin-left: 8px;
     opacity: ${$disabled ? 0.6 : 1};
     user-select: none;

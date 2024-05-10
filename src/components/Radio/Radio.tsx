@@ -11,10 +11,10 @@ export type RadioProps = ComponentPropsWithRef<'input'> & {
 const Hidden = styled(HiddenInput)``;
 
 const StyledRadio = styled.div<{ $checked: boolean; $disabled: boolean }>`
-  ${({ theme: { color }, $checked, $disabled }) => css`
+  ${({ theme: { color, border }, $checked, $disabled }) => css`
     width: 0.9em;
     height: 0.9em;
-    border-radius: 50%;
+    border-radius: ${border.radiusRound};
     border: 0.1em solid ${color.textVar};
     transition: all 150ms;
     transform: translateY(-0.11em);
@@ -26,10 +26,10 @@ const StyledRadio = styled.div<{ $checked: boolean; $disabled: boolean }>`
       content: '';
       width: 0.7em;
       height: 0.7em;
-      border-radius: 50%;
+      border-radius: ${border.radiusRound};
       transform: ${$checked ? 'scale(1)' : 'scale(0)'};
       transition: transform 150ms ease-in-out;
-      box-shadow: inset 1em 1em ${color.accent};
+      box-shadow: inset 1em 1em ${color.accentLight};
     }
 
     &:checked::before {
@@ -37,7 +37,7 @@ const StyledRadio = styled.div<{ $checked: boolean; $disabled: boolean }>`
     }
 
     .radio:focus + & {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`2px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
@@ -69,8 +69,8 @@ const RadioWrapper = styled.div<{ $disabled: boolean }>`
 `;
 
 const Label = styled.label`
-  ${({ theme: { font } }) => css`
-    font-size: ${font.md};
+  ${({ theme: { typography } }) => css`
+    font-size: ${typography.sizeMedium};
   `}
 `;
 

@@ -9,23 +9,22 @@ export type LinkProps = ComponentPropsWithRef<'a'> & {
 };
 
 const StyledLink = styled.a`
-  ${({ theme: { font, color } }) => css`
+  ${({ theme: { color } }) => css`
     text-decoration: underline;
-    text-decoration-color: ${color.accent};
+    text-decoration-color: ${color.accentLight};
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
-    font-family: ${font.family};
-    color: ${color.primary};
+    color: ${color.primaryLight};
     display: inline-flex;
     align-items: center;
 
     &:focus {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`2px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
     &:visited {
-      color: ${color.primaryDark};
+      color: ${color.primary};
     }
   `}
 `;
@@ -42,7 +41,7 @@ const StyledSpan = styled.span`
       height: 2px;
       bottom: 0;
       left: 0;
-      background-color: ${color.accentXDark};
+      background-color: ${color.accentDark};
       transform: scaleX(0);
       transition: transform 0.5s ease;
       transform-origin: bottom right;

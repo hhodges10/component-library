@@ -11,23 +11,23 @@ type ChipProps = {
 };
 
 const baseStyles = css<{ $type: ChipProps['type'] }>`
-  ${({ theme: { font, color }, $type }) => css`
+  ${({ theme: { typography, color, border }, $type }) => css`
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 4px 14px;
-    border-radius: 50px;
+    border-radius: ${border.radiusRound};
     background-color: ${$type === 'default'
       ? color.backgroundVar
       : $type === 'primary'
-        ? color.primary
+        ? color.primaryLight
         : 'transparent'};
     border: ${$type === 'primary'
-      ? `2px solid ${color.primary}`
+      ? `2px solid ${color.primaryLight}`
       : `2px solid ${color.backgroundVar}`};
     color: ${$type === 'primary' ? color.background : color.text};
-    font-size: ${font.sm};
-    font-weight: ${font.light};
+    font-size: ${typography.sizeSmedium};
+    font-weight: ${typography.weightLight};
   `}
 `;
 
@@ -37,7 +37,7 @@ const ButtonChip = styled.button<{
   ${baseStyles};
   ${({ theme: { color }, $type }) => css`
     &:focus {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`2px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
@@ -47,12 +47,12 @@ const ButtonChip = styled.button<{
 
     &:active {
       background-color: ${$type === 'primary'
-        ? color.primaryDark
+        ? color.primary
         : $type === 'outline'
           ? color.backgroundVar
           : 'transparent'};
       border: ${$type === 'primary'
-        ? `2px solid ${color.primaryDark}`
+        ? `2px solid ${color.primary}`
         : `2px solid ${color.backgroundVar}`};
     }
   `};

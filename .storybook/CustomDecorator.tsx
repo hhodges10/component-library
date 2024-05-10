@@ -4,11 +4,9 @@ import { ThemeProvider } from 'styled-components';
 import theme from './../src/themes/themes';
 
 function ThemeWrapper(props: any) {
-  return (
-    <ThemeProvider theme={useDarkMode() ? theme.dark : theme.light}>
-      {props.children}
-    </ThemeProvider>
-  );
+  const mode = useDarkMode() ? 'dark' : 'light';
+  const currentTheme = theme(mode);
+  return <ThemeProvider theme={currentTheme}>{props.children}</ThemeProvider>;
 }
 
 export const decorators = [

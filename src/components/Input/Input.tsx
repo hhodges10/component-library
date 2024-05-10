@@ -14,15 +14,15 @@ const InputWrapper = styled.div`
 `;
 
 const UnderlineInput = styled.input<{ $subtype: string }>`
-  ${({ theme: { font, color }, $subtype }) => css`
+  ${({ theme: { typography, color, border }, $subtype }) => css`
     height: 48px;
     width: 480px;
-    font-size: ${font.md};
+    font-size: ${typography.sizeMedium};
     border: none;
     border-bottom: ${$subtype === 'primary'
-      ? `4px solid ${color.primary}`
-      : `4px solid ${color.accent}`};
-    border-radius: 3px;
+      ? `4px solid ${color.primaryLight}`
+      : `4px solid ${color.accentLight}`};
+    border-radius: ${border.radiusSmall};
     padding: 6px 12px 0;
     margin-top: 12px;
     outline: none;
@@ -30,20 +30,19 @@ const UnderlineInput = styled.input<{ $subtype: string }>`
     background-color: ${color.backgroundVar};
 
     &:focus {
-      outline: ${`2px solid ${color.accentFocusColor}`};
+      outline: ${`2px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
   `}
 `;
 
 const Label = styled.label<{ $subtype: string }>`
-  ${({ theme: { color } }) => css`
+  ${({ theme: { typography, color } }) => css`
     position: absolute;
     top: 30px;
     left: 10px;
     color: ${color.text};
-    font-family: 'Rubik', sans-serif;
-    font-size: 1.25rem;
+    font-size: ${typography.sizeMedium};
     opacity: 0.85;
     transition: 0.2s ease all;
 
@@ -62,8 +61,8 @@ const Label = styled.label<{ $subtype: string }>`
 const OutlineInput = styled(UnderlineInput)`
   border: ${({ $subtype, theme }) =>
     $subtype === 'primary'
-      ? `4px solid ${theme.color.primary}`
-      : `4px solid ${theme.color.accent}`};
+      ? `4px solid ${theme.color.primaryLight}`
+      : `4px solid ${theme.color.accentLight}`};
   + ${Label} {
     top: 32px;
   }
