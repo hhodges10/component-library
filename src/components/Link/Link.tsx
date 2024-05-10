@@ -19,7 +19,7 @@ const StyledLink = styled.a`
     align-items: center;
 
     &:focus {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 

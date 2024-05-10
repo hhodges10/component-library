@@ -80,7 +80,7 @@ const ToggleBackground = styled.div<{
     }
 
     .toggle-checkbox:focus + & {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 

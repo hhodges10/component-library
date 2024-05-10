@@ -55,7 +55,7 @@ const SolidButton = styled.button<{ $subtype?: string }>`
     }
 
     &:focus-visible {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
@@ -108,7 +108,7 @@ const OutlineButton = styled(SolidButton)<{ $subtype?: string }>`
     }
 
     &:focus-visible {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 

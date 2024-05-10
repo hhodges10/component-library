@@ -37,7 +37,7 @@ const StyledRadio = styled.div<{ $checked: boolean; $disabled: boolean }>`
     }
 
     .radio:focus + & {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 

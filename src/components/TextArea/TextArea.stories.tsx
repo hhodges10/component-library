@@ -13,5 +13,12 @@ export default meta;
 type Story = StoryObj<typeof TextArea>;
 
 export const Default: Story = {
-  render: () => <TextArea name="Test"></TextArea>,
+  render: (args) => (
+    <div style={{ width: '480px', height: '6rem' }}>
+      <TextArea
+        {...args}
+        inputLabel={args.inputLabel || 'Your text here...'}
+      ></TextArea>
+    </div>
+  ),
 };

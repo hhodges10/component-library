@@ -10,13 +10,13 @@ type InputProps = ComponentPropsWithRef<'input'> & {
 
 const InputWrapper = styled.div`
   position: relative;
-  width: 480px;
+  width: 100%;
 `;
 
 const UnderlineInput = styled.input<{ $subtype: string }>`
   ${({ theme: { typography, color, border }, $subtype }) => css`
+    width: 100%;
     height: 48px;
-    width: 480px;
     font-size: ${typography.sizeMedium};
     border: none;
     border-bottom: ${$subtype === 'primary'
@@ -30,7 +30,7 @@ const UnderlineInput = styled.input<{ $subtype: string }>`
     background-color: ${color.backgroundVar};
 
     &:focus {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
   `}
@@ -61,10 +61,14 @@ const Label = styled.label<{ $subtype: string }>`
 const OutlineInput = styled(UnderlineInput)`
   border: ${({ $subtype, theme }) =>
     $subtype === 'primary'
+      ? `1px solid ${theme.color.primaryLight}`
+      : `1px solid ${theme.color.accentLight}`};
+  border-bottom: ${({ $subtype, theme }) =>
+    $subtype === 'primary'
       ? `4px solid ${theme.color.primaryLight}`
       : `4px solid ${theme.color.accentLight}`};
   + ${Label} {
-    top: 32px;
+    top: 31px;
   }
 `;
 

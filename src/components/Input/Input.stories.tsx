@@ -19,15 +19,21 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  args: {
-    inputLabel: 'First Name',
-  },
+  render: (args) => (
+    <div style={{ width: '480px' }}>
+      <Input {...args} inputLabel={args.inputLabel || 'First Name'}></Input>
+    </div>
+  ),
 };
 
 export const Outline: Story = {
-  args: {
-    inputLabel: 'First Name',
-    type: 'outline',
-    subtype: 'primary',
-  },
+  render: (args) => (
+    <div style={{ width: '480px' }}>
+      <Input
+        {...args}
+        inputLabel={args.inputLabel || 'First Name'}
+        type="outline"
+      ></Input>
+    </div>
+  ),
 };

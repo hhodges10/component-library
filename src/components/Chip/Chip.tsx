@@ -37,7 +37,7 @@ const ButtonChip = styled.button<{
   ${baseStyles};
   ${({ theme: { color }, $type }) => css`
     &:focus {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 

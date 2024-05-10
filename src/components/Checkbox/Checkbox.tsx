@@ -32,7 +32,7 @@ const StyledCheckbox = styled.div<{ $checked: boolean; $disabled: boolean }>`
     transition: all 150ms;
 
     .checkbox:focus + & {
-      outline: ${`2px solid ${color.primaryFocus}`};
+      outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
 
