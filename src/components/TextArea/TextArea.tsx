@@ -44,7 +44,7 @@ const StyledTextArea = styled.textarea<{
   `}
 `;
 
-const Label = styled.label`
+const LabelSpan = styled.span`
   ${({ theme: { typography, color } }) => css`
     position: absolute;
     top: 10px;
@@ -74,14 +74,15 @@ function TextArea({
 }: TextAreaProps) {
   return (
     <InputWrapper>
-      <StyledTextArea
-        id="textarea"
-        placeholder=" "
-        $type={type}
-        $subtype={subtype}
-        {...props}
-      ></StyledTextArea>
-      <Label htmlFor="textarea">{inputLabel}</Label>
+      <label>
+        <StyledTextArea
+          placeholder=" "
+          $type={type}
+          $subtype={subtype}
+          {...props}
+        ></StyledTextArea>
+        <LabelSpan>{inputLabel}</LabelSpan>
+      </label>
     </InputWrapper>
   );
 }

@@ -36,7 +36,7 @@ const UnderlineInput = styled.input<{ $subtype: string }>`
   `}
 `;
 
-const Label = styled.label<{ $subtype: string }>`
+const LabelSpan = styled.span`
   ${({ theme: { typography, color } }) => css`
     position: absolute;
     top: 30px;
@@ -67,7 +67,7 @@ const OutlineInput = styled(UnderlineInput)`
     $subtype === 'primary'
       ? `4px solid ${theme.color.primaryLight}`
       : `4px solid ${theme.color.accentLight}`};
-  + ${Label} {
+  + ${LabelSpan} {
     top: 31px;
   }
 `;
@@ -81,24 +81,22 @@ function Input({
 }: InputProps) {
   return (
     <InputWrapper>
-      {type === 'underline' ? (
-        <UnderlineInput
-          id="input"
-          $subtype={subtype}
-          placeholder=" "
-          {...props}
-        ></UnderlineInput>
-      ) : (
-        <OutlineInput
-          id="input"
-          $subtype={subtype}
-          placeholder=" "
-          {...props}
-        ></OutlineInput>
-      )}
-      <Label id="label" htmlFor="input" $subtype={subtype}>
-        {inputLabel}
-      </Label>
+      <label>
+        {type === 'underline' ? (
+          <UnderlineInput
+            $subtype={subtype}
+            placeholder=" "
+            {...props}
+          ></UnderlineInput>
+        ) : (
+          <OutlineInput
+            $subtype={subtype}
+            placeholder=" "
+            {...props}
+          ></OutlineInput>
+        )}
+        <LabelSpan>{inputLabel}</LabelSpan>
+      </label>
     </InputWrapper>
   );
 }
