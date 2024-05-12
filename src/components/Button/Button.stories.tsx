@@ -9,6 +9,15 @@ const meta: Meta<typeof Button> = {
     innerText: {
       control: { type: 'text' },
     },
+    customType: {
+      control: false,
+    },
+    subtype: {
+      control: false,
+    },
+    disabled: {
+      control: false,
+    },
   },
 };
 
@@ -41,13 +50,11 @@ export const Default: Story = {
   render: (args) => {
     const buttonArgs = { ...primaryButton, ...args };
     return (
-      <>
-        <Button {...buttonArgs} />
-        <div style={{ margin: '10px' }}></div>
+      <div style={{ display: 'flex', gap: '3rem' }}>
+        <Button {...buttonArgs} innerText={args?.innerText || 'Primary'} />
         <Button {...accentButton} />
-        <div style={{ margin: '10px' }}></div>
         <Button {...destructiveButton} />
-      </>
+      </div>
     );
   },
 };
@@ -63,13 +70,28 @@ export const Outline: Story = {
   render: (args) => {
     const buttonArgs = { ...primaryOutline, ...args };
     return (
-      <>
-        <Button {...buttonArgs} />
-        <div style={{ margin: '10px' }}></div>
+      <div style={{ display: 'flex', gap: '3rem' }}>
+        <Button {...buttonArgs} innerText={args?.innerText || 'Primary'} />
         <Button {...accentOutline} />
-        <div style={{ margin: '10px' }}></div>
         <Button {...destructiveOutline} />
-      </>
+      </div>
+    );
+  },
+};
+
+export const Disabled: Story = {
+  render: ({ innerText }) => {
+    const disabledArg: ButtonProps = {
+      innerText: innerText || 'disabled',
+      customType: 'solid',
+      disabled: true,
+      subtype: 'primary',
+    };
+    return (
+      <div style={{ display: 'flex', gap: '3rem' }}>
+        <Button {...disabledArg} />
+        <Button {...disabledArg} customType="outline" />
+      </div>
     );
   },
 };

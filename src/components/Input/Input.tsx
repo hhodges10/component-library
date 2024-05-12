@@ -6,15 +6,17 @@ type InputProps = ComponentPropsWithRef<'input'> & {
   type?: 'underline' | 'outline';
   subtype?: 'primary' | 'accent';
   inputSize?: 'sm' | 'md' | 'lg' | 'xl';
+  disabled?: boolean;
 };
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ $disabled: boolean }>`
   position: relative;
   width: 100%;
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 `;
 
 const UnderlineInput = styled.input<{ $subtype: string }>`
-  ${({ theme: { typography, color, border }, $subtype }) => css`
+  ${({ theme: { typography, color, border }, $subtype, disabled }) => css`
     width: 100%;
     height: 48px;
     font-size: ${typography.sizeMedium};
@@ -33,11 +35,15 @@ const UnderlineInput = styled.input<{ $subtype: string }>`
       outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
     }
+
+    &:hover {
+      cursor: ${disabled ? 'not-allowed' : 'text'};
+    }
   `}
 `;
 
-const LabelSpan = styled.span`
-  ${({ theme: { typography, color } }) => css`
+const LabelSpan = styled.span<{ $disabled: boolean }>`
+  ${({ theme: { typography, color }, $disabled }) => css`
     position: absolute;
     top: 30px;
     left: 10px;
@@ -47,7 +53,7 @@ const LabelSpan = styled.span`
     transition: 0.2s ease all;
 
     &:hover {
-      cursor: text;
+      cursor: ${$disabled ? 'not-allowed' : 'text'};
     }
 
     ${UnderlineInput}:is(:focus, :not(:placeholder-shown)) ~ & {
@@ -76,26 +82,29 @@ function Input({
   type = 'underline',
   subtype = 'primary',
   inputSize = 'md',
+  disabled = false,
   inputLabel,
   ...props
 }: InputProps) {
   return (
-    <InputWrapper>
+    <InputWrapper $disabled={disabled}>
       <label>
         {type === 'underline' ? (
           <UnderlineInput
             $subtype={subtype}
             placeholder=" "
+            disabled={disabled}
             {...props}
           ></UnderlineInput>
         ) : (
           <OutlineInput
             $subtype={subtype}
             placeholder=" "
+            disabled={disabled}
             {...props}
           ></OutlineInput>
         )}
-        <LabelSpan>{inputLabel}</LabelSpan>
+        <LabelSpan $disabled={disabled}>{inputLabel}</LabelSpan>
       </label>
     </InputWrapper>
   );

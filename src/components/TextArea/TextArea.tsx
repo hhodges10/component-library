@@ -5,19 +5,26 @@ export type TextAreaProps = ComponentPropsWithRef<'textarea'> & {
   inputLabel: string;
   type?: 'underline' | 'outline';
   subtype?: 'primary' | 'accent';
+  disabled?: boolean;
 };
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ $disabled: boolean }>`
   position: relative;
   width: 100%;
   height: 100%;
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 `;
 
 const StyledTextArea = styled.textarea<{
   $type: TextAreaProps['type'];
   $subtype: TextAreaProps['subtype'];
 }>`
-  ${({ theme: { typography, color, border }, $type, $subtype }) => css`
+  ${({
+    theme: { typography, color, border },
+    $type,
+    $subtype,
+    disabled,
+  }) => css`
     width: 100%;
     height: 100%;
     overflow: scroll;
@@ -37,6 +44,10 @@ const StyledTextArea = styled.textarea<{
     border-radius: ${border.radiusSmall};
     resize: none;
 
+    &:hover {
+      cursor: ${disabled ? 'not-allowed' : 'text'};
+    }
+
     &:focus {
       outline: ${`1px solid ${color.primaryFocus}`};
       outline-offset: 2px;
@@ -44,8 +55,8 @@ const StyledTextArea = styled.textarea<{
   `}
 `;
 
-const LabelSpan = styled.span`
-  ${({ theme: { typography, color } }) => css`
+const LabelSpan = styled.span<{ $disabled: boolean }>`
+  ${({ theme: { typography, color }, $disabled }) => css`
     position: absolute;
     top: 10px;
     left: 10px;
@@ -55,7 +66,7 @@ const LabelSpan = styled.span`
     transition: 0.2s ease all;
 
     &:hover {
-      cursor: text;
+      cursor: ${$disabled ? 'not-allowed' : 'text'};
     }
 
     ${StyledTextArea}:is(:focus, :not(:placeholder-shown)) ~ & {
@@ -68,20 +79,22 @@ const LabelSpan = styled.span`
 
 function TextArea({
   inputLabel,
-  type = 'outline',
+  type = 'underline',
   subtype = 'primary',
+  disabled = false,
   ...props
 }: TextAreaProps) {
   return (
-    <InputWrapper>
+    <InputWrapper $disabled={disabled}>
       <label>
         <StyledTextArea
           placeholder=" "
           $type={type}
           $subtype={subtype}
+          disabled={disabled}
           {...props}
         ></StyledTextArea>
-        <LabelSpan>{inputLabel}</LabelSpan>
+        <LabelSpan $disabled={disabled}>{inputLabel}</LabelSpan>
       </label>
     </InputWrapper>
   );

@@ -18,7 +18,7 @@ const meta: Meta<typeof Checkbox> = {
       },
     },
     disabled: {
-      control: { type: 'boolean' },
+      control: false,
     },
   },
 };
@@ -41,4 +41,8 @@ const CheckboxTemplate = (args: CheckboxProps) => {
 
 export const Default: Story = {
   render: (args) => <CheckboxTemplate {...args}></CheckboxTemplate>,
+};
+
+export const Disabled: Story = {
+  render: (args) => <CheckboxTemplate {...args} disabled></CheckboxTemplate>,
 };

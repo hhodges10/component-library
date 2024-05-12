@@ -119,7 +119,7 @@ const LabelSpan = styled.span<{ $disabled: boolean }>`
 
 function Toggle({
   checked,
-  label = 'Toggle Switch Label',
+  label,
   disabled = false,
   inputSize: size = 'md',
   withIconIndicator: withIcon = true,

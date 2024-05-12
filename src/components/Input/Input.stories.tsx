@@ -6,6 +6,12 @@ const meta: Meta<typeof Input> = {
   component: Input,
   tags: ['autodocs'],
   argTypes: {
+    disabled: {
+      control: false,
+    },
+    type: {
+      control: false,
+    },
     onChange: {
       table: {
         disable: true,
@@ -35,5 +41,27 @@ export const Outline: Story = {
         type="outline"
       ></Input>
     </div>
+  ),
+};
+
+export const Disabled: Story = {
+  render: (args) => (
+    <>
+      <div style={{ width: '480px' }}>
+        <Input
+          {...args}
+          inputLabel={args.inputLabel || 'First Name'}
+          disabled
+        ></Input>
+      </div>
+      <div style={{ width: '480px' }}>
+        <Input
+          {...args}
+          inputLabel={args.inputLabel || 'First Name'}
+          type="outline"
+          disabled
+        ></Input>
+      </div>
+    </>
   ),
 };
