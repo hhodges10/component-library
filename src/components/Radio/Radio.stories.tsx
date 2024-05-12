@@ -19,22 +19,16 @@ const meta: Meta<typeof Radio> = {
       },
     },
     checked: {
-      table: {
-        disable: true,
-      },
+      control: false,
     },
     value: {
-      table: {
-        disable: true,
-      },
+      control: false,
     },
     label: {
-      table: {
-        disable: true,
-      },
+      control: false,
     },
     disabled: {
-      control: { type: 'boolean' },
+      control: false,
     },
   },
 };
@@ -79,4 +73,8 @@ const WrapperTemplate = (args: RadioProps) => {
 
 export const Default: Story = {
   render: (args) => <WrapperTemplate {...args}></WrapperTemplate>,
+};
+
+export const Disabled: Story = {
+  render: (args) => <WrapperTemplate {...args} disabled></WrapperTemplate>,
 };

@@ -23,7 +23,7 @@ const meta: Meta<typeof Toggle> = {
       },
     },
     disabled: {
-      control: { type: 'boolean' },
+      control: false,
     },
     value: {
       table: {
@@ -43,9 +43,20 @@ const ToggleTemplate = (args: ToggleProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
-  return <Toggle {...args} onChange={handleChange} checked={checked}></Toggle>;
+  return (
+    <Toggle
+      {...args}
+      label={args.label || 'Toggle Switch Label'}
+      onChange={handleChange}
+      checked={checked}
+    ></Toggle>
+  );
 };
 
 export const Default: Story = {
   render: (args) => <ToggleTemplate {...args}></ToggleTemplate>,
+};
+
+export const Disabled: Story = {
+  render: (args) => <ToggleTemplate {...args} disabled></ToggleTemplate>,
 };
